@@ -22,7 +22,7 @@ import Socket from "../images/socket.png";
 import Livechat from "../images/livechat.png";
 import Djangopython from "../images/djangopython.png";
 import Image from "../images/image.png";
-import Image1 from "../images/image02.png";
+import Image1 from "../images/Image02.png";
 import Social from "../images/social01.png";
 import ToDo from "../images/todo.png";
 import myCv from "../images/myCv.pdf";
