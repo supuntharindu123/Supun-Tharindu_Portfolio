@@ -171,7 +171,7 @@ function Home() {
             <div className="hello flex flex-row items-center justify-center lg:ml-[300px]">
               <img
                 src={Me}
-                className="w-[600px] h-[750px] brightness-95 contrast-125"
+                className="lg:w-[600px] lg:h-[750px] brightness-95 contrast-125"
               ></img>
             </div>
           </div>
@@ -259,7 +259,7 @@ function Home() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center pb-10 bg-gray-200 dark:bg-slate-800 xl:flex-row">
-            <div className="flex flex-col items-center justify-center myblock lg:mr-16 lg:flex-row md:flex-row">
+            <div className="flex flex-col items-center justify-center myblock lg:mr-16 lg:flex-row md:flex-row lg:ml-16">
               <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-gray-400 shadow-lg dark:*:shadow-slate-200 w-80 hover:border-slate-400 hover:shadow-none dark:bg-slate-800">
                 <img src={Social} className="rounded-md w-80 h-52"></img>
                 <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
