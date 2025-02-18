@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "../../src/App.css";
 import NavBar from "./nav";
 import Footer from "./footer";
-import Test from "../images/myimg1.jpg";
 import Me from "../images/me8.png";
 import HTML from "../images/html.png";
 import CSS from "../images/css.png";
@@ -32,7 +31,7 @@ import { CiLinkedin } from "react-icons/ci";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { MdDarkMode } from "react-icons/md";
-import { CiLight } from "react-icons/ci";
+import { MdLightMode } from "react-icons/md";
 
 function Home() {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
@@ -110,10 +109,10 @@ function Home() {
       <button
         onClick={themeChange}
         className={`absolute ms-80 border-5 border-black border my-3 p-2 mt-5 rounded-md font-bold shadow text-2 xl ${
-          mytheme === "true" ? "bg-slate-600 text-white" : "bg-gray-50"
+          mytheme === "true" ? "bg-slate-100 font-bold border " : "bg-gray-50"
         }`}
       >
-        {mytheme === "true" ? <CiLight></CiLight> : <MdDarkMode></MdDarkMode>}
+        {mytheme === "true" ? <MdLightMode /> : <MdDarkMode></MdDarkMode>}
       </button>
       <div className={`${mytheme === "true" && "dark"} `}>
         <NavBar></NavBar>
@@ -145,13 +144,13 @@ function Home() {
                   <CiLinkedin className="hover:animate-bounce"></CiLinkedin>
                 </a>
                 <a
-                  href=""
+                  href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
                   className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white"
                 >
                   <FaFacebook className="hover:animate-bounce"></FaFacebook>
                 </a>
                 <a
-                  href=""
+                  href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr "
                   className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white"
                 >
                   <FaInstagramSquare className="hover:animate-bounce"></FaInstagramSquare>
@@ -176,11 +175,11 @@ function Home() {
             </div>
           </div>
           <div
-            className="flex flex-col items-center justify-center pt-20 pb-10 bg-gray-400 lg:columns-2 lg:flex-row dark:bg-slate-700 md:columns-1 "
+            className="flex flex-col items-center justify-center pt-10 pb-10 bg-gray-400 lg:columns-2 lg:flex-row dark:bg-slate-700 md:columns-1 "
             id="about"
           >
             <div className="lg:w-[50%] justify-center flex myblock">
-              <h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl xl:text-8xl lg:text-7xl dark:text-white lg:w-[30%] text-center">
+              <h1 className="mb-5 font-extrabold text-4xl sm:text-5xl md:text-6xl xl:text-8xl lg:text-7xl dark:text-white lg:w-[30%] text-center">
                 About Me
               </h1>
             </div>
@@ -378,13 +377,13 @@ function Home() {
                 Contact
               </h1>
               <div className="flex flex-col justify-start ">
-                <p className="max-w-md mt-6 text-xl text-center text-gray-600 myblock lg:text-start dark:text-gray-300">
-                  Have a question? Feel free to reach out!
+                <p className="max-w-md mt-6 text-xl text-center text-gray-600 myblock lg:text-center dark:text-gray-300">
+                  Have a question? Contact
                 </p>
 
                 <div className="flex justify-center mt-8 space-x-6 myblock lg:justify-start">
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-800 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500"

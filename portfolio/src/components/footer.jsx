@@ -52,14 +52,14 @@ function Footer() {
             </a>
             <a
               target="_blank"
-              href=""
+              href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
               className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
             >
               <FaFacebook></FaFacebook>
             </a>
             <a
               target="_blank"
-              href=""
+              href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr "
               className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
             >
               <FaInstagramSquare></FaInstagramSquare>
