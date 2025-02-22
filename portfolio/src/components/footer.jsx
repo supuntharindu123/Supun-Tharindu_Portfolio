@@ -67,7 +67,7 @@ function Footer() {
           </div>
         </div>
         <p className="p-2 font-bold text-center text-white bg-slate-900">
-          Copyright © 2022 My Portfolio. All rights reserved.
+          Copyright © 2025 My Portfolio. All rights reserved.
         </p>
       </footer>
     </div>
