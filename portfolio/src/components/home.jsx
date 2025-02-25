@@ -265,7 +265,7 @@ function Home() {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg dark:bg-slate-800 hover:shadow-none hover:border-neutral-600"
+                  className="transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg myblock dark:bg-slate-800 hover:shadow-none hover:border-neutral-600"
                 >
                   <img
                     src={project.image}
