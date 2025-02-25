@@ -24,6 +24,7 @@ import Image from "../images/image.png";
 import Image1 from "../images/Image02.png";
 import Social from "../images/social01.png";
 import ToDo from "../images/todo.png";
+import MyTube from "../images/mytube.png";
 import myCv from "../images/myCv.pdf";
 import { FaDownload } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -48,6 +49,57 @@ function Home() {
       setTimeout(() => setVisible(false), 10000);
     }
   }, [msg]);
+
+  const projects = [
+    {
+      title: "Vehicle Advertisement System",
+      description:
+        "Developed a web-based Vehicle Advertisement system with filter ads, post ads (with validations), user authentication, and a responsive UI.",
+      image: `${Image1}`,
+      github: "https://github.com/supuntharindu123/Vehical-Ads",
+    },
+    {
+      title: "My Portfolio",
+      description:
+        "I am Supun Tharindu Kumarasena, a third-year undergraduate student at SLIIT, pursuing a degree in Information Technology.",
+      image: `${Image}`,
+      github: "#",
+    },
+    {
+      title: "Social Media Platform",
+      description:
+        "User authentication (live validations), Messaging, Post creation, Following & Followers, and Profile management.",
+      image: `${Social}`,
+      github: "https://github.com/supuntharindu123/MYAPP",
+    },
+    {
+      title: "Live Chat Application",
+      description:
+        "Developed a live chat application with send, delete, and edit messages, along with user authentication.",
+      image: `${Livechat}`,
+      github: "https://github.com/supuntharindu123/livechat_web_application",
+    },
+    {
+      title: "User Management System",
+      description:
+        "Developed a user record management system with full CRUD operations using Django.",
+      image: `${Djangopython}`,
+      github: "https://github.com/supuntharindu123/Django",
+    },
+    {
+      title: "Task Management App",
+      description:
+        "Created a task management app with CRUD operations using Kotlin.",
+      image: `${ToDo}`,
+      github: "https://github.com/supuntharindu123/TaskmanagementApp",
+    },
+    {
+      title: "YouTube Clone",
+      description: "Created YouTube Clone using YouTube Data Api and React.",
+      image: `${MyTube}`,
+      github: "https://github.com/supuntharindu123/mytube",
+    },
+  ];
 
   const themeChange = () => {
     setTheme(!theme);
@@ -205,138 +257,41 @@ function Home() {
               </a>
             </div>
           </div>
-          <div
-            id="projects"
-            className="flex flex-col items-center justify-center pt-12 pb-6 bg-gray-200 xl:flex-row xl:columns-2 dark:bg-slate-800"
-          >
-            <div className="lg:w-[50%] justify-center flex items-center">
-              <h1 className="items-center justify-center mt-10 text-4xl font-extrabold text-center myblock sm:text-5xl md:text-5xl xl:text-8xl lg:text-5xl dark:text-white text-slate-800">
-                <span className="text-center">My</span> Projects
-              </h1>
-            </div>
-            <div className="flex flex-col items-center justify-center lg:mr-16 lg:flex-row xl:-ml-20 md:flex-row">
-              <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-lg myblock shadow-slate-400 dark:shadow-slate-200 w-80 hover:border-slate-400 hover:shadow-none dark:bg-slate-800">
-                <img src={Image1} className="rounded-md w-80 h-52"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  Vehicle Advertisement System
+          <div className="py-12 bg-gray-200 dark:bg-slate-800">
+            <h1 className="mb-10 text-4xl font-extrabold text-center sm:text-5xl md:text-6xl lg:text-7xl text-slate-800 dark:text-white">
+              My Projects
+            </h1>
+            <div className="container grid grid-cols-1 gap-8 px-6 mx-auto md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg dark:bg-slate-800 hover:shadow-none hover:border-neutral-600"
+                >
+                  <img
+                    src={project.image}
+                    className="object-cover w-full rounded-t-lg h-52"
+                    alt={project.title}
+                  />
+                  <div className="p-6">
+                    <h2 className="text-2xl font-bold text-center dark:text-white">
+                      {project.title}
+                    </h2>
+                    <p className="mt-3 mb-5 text-lg text-center dark:text-white">
+                      {project.description}
+                    </p>
+                    <div className="flex justify-center">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-full py-2 font-bold text-center transition-colors duration-300 bg-white border rounded-lg shadow-md hover:bg-slate-900 hover:text-white"
+                      >
+                        GitHub <FaGithub className="ml-2 text-xl" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <p className="px-3 text-lg text-center dark:text-white h-28">
-                  Developed a web-based Vehicle Advertisement system with filter
-                  ads ,post ads (include validations) , user authentications and
-                  responsive UI.
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    target="_blank"
-                    href="https://github.com/supuntharindu123/Vehical-Ads"
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
-              <div className="myblock justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-lg shadow-slate-400 dark:shadow-slate-200 w-80 hover:border-4\slate-400 dark:bg-slate-800 hover:shadow-none  ">
-                <img src={Image} className="rounded-md w-80 h-52"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  My Portfolio
-                </div>
-                <p className="px-3 text-lg text-center dark:text-white h-28">
-                  I am Supun Tharindu Kumarasena and a third year undergraduate
-                  student at SLIIT. The degree programme is in Information
-                  Technology
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    target="_blank"
-                    href=""
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-center pb-10 bg-gray-200 dark:bg-slate-800 xl:flex-row">
-            <div className="flex flex-col items-center justify-center myblock lg:mr-16 lg:flex-row md:flex-row lg:ml-16">
-              <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-gray-400 shadow-lg dark:*:shadow-slate-200 w-80 hover:border-slate-400 hover:shadow-none dark:bg-slate-800">
-                <img src={Social} className="rounded-md w-80 h-52"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  Social Media Platform
-                </div>
-                <p className="px-3 text-lg text-center dark:text-white h-28">
-                  User authentication (live validations), Messaging, Post
-                  creation, Following & Followers , and Profile management.
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    target="_blank"
-                    href="https://github.com/supuntharindu123/MYAPP"
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
-              <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-lg myblock shadow-slate-400 dark:shadow-slate-200 w-80 hover:border-slate-400 hover:shadow-none dark:bg-slate-800">
-                <img src={Livechat} className="rounded-md h-52 w-80"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  Live Chat Application
-                </div>
-                <p className="px-3 text-lg text-center dark:text-white h-28">
-                  Developed live chat application with send,delete and edit
-                  messages , and user authentications
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    target="_blank"
-                    href="https://github.com/supuntharindu123/livechat_web_application"
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center bg-gray-200 lg:mr-16 lg:flex-row xl:-ml-12 md:flex-row dark:bg-slate-800">
-              <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-lg myblock shadow-slate-400 dark:shadow-slate-200 w-80 hover:border-slate-400 dark:bg-slate-800 hover:shadow-none">
-                <img src={Djangopython} className="rounded-md h-52 w-80"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  User Management System
-                </div>
-                <p className="px-3 text-lg text-center h-28 dark:text-white">
-                  Developed user record management system with Full CRUD
-                  operations.
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    target="_blank"
-                    href="https://github.com/supuntharindu123/Django"
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
-              <div className="justify-center pb-6 m-6 bg-gray-300 border-4 rounded-md shadow-lg myblock shadow-slate-400 dark:shadow-slate-200 w-80 hover:shadow-none dark:bg-slate-800 hover:border-slate-400">
-                <img src={ToDo} className="rounded-md w-80 h-52"></img>
-                <div className="h-16 px-3 mt-2 text-2xl font-bold text-center dark:text-white">
-                  Task Management App
-                </div>
-                <p className="px-3 text-lg text-center dark:text-white h-28">
-                  Created a task management app with CRUD operations using
-                  Kotlin.
-                </p>
-                <div className="flex items-center justify-center mt-2">
-                  <a
-                    href="https://github.com/supuntharindu123/TaskmanagementApp"
-                    target="_blank"
-                    className="flex items-center justify-center w-full py-2 mx-6 font-bold text-center bg-white border rounded-lg shadow-md hover:text-slate-100 hover:bg-slate-900"
-                  >
-                    GitHub <FaGithub className="ml-2 text-sm"></FaGithub>
-                  </a>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div
