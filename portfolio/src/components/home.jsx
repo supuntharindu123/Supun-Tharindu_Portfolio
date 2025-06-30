@@ -99,6 +99,12 @@ function Home() {
       image: `${MyTube}`,
       github: "https://github.com/supuntharindu123/mytube",
     },
+    {
+      title: "YouTube Clone",
+      description: "Created YouTube Clone using YouTube Data Api and React.",
+      image: `${MyTube}`,
+      github: "https://github.com/supuntharindu123/mytube",
+    },
   ];
 
   const themeChange = () => {
