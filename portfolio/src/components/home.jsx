@@ -25,7 +25,10 @@ import Image1 from "../images/Image02.png";
 import Social from "../images/social01.png";
 import ToDo from "../images/todo.png";
 import MyTube from "../images/mytube.png";
-import myCv from "../images/myCv.pdf";
+import myCv from "../images/Supun_Tharindu_Kumarasena_CV_SE.pdf";
+import MallApp from "../images/MallApp.png";
+import Resume from "../images/Resume.png";
+import TaskApp from "../images/TaskApp.png";
 import { FaDownload } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
@@ -51,6 +54,27 @@ function Home() {
   }, [msg]);
 
   const projects = [
+    {
+      title: "Shopping Mall Management System",
+      description:
+        "Built a comprehensive Shopping Mall Management System to streamline operations and enhance user engagement",
+      image: `${MallApp}`,
+      github: "https://github.com/supuntharindu123/mytube",
+    },
+    {
+      title: "Resume Analyzer",
+      description:
+        "Developed a full-stack AI-powered Resume Analysis system designed to revolutionize hiring by precisely matching resumes to job descriptions, optimizing recruitment processes, and assisting job seekers",
+      image: `${Resume}`,
+      github: "https://github.com/supuntharindu123/mytube",
+    },
+    {
+      title: "Advance Task Manegement App",
+      description:
+        " Developed a full-stack Task Management System with advanced features for efficient workflow and collaboration.",
+      image: `${TaskApp}`,
+      github: "https://github.com/supuntharindu123/mytube",
+    },
     {
       title: "Vehicle Advertisement System",
       description:
@@ -79,25 +103,19 @@ function Home() {
       image: `${Livechat}`,
       github: "https://github.com/supuntharindu123/livechat_web_application",
     },
-    {
-      title: "User Management System",
-      description:
-        "Developed a user record management system with full CRUD operations using Django.",
-      image: `${Djangopython}`,
-      github: "https://github.com/supuntharindu123/Django",
-    },
+    // {
+    //   title: "User Management System",
+    //   description:
+    //     "Developed a user record management system with full CRUD operations using Django.",
+    //   image: `${Djangopython}`,
+    //   github: "https://github.com/supuntharindu123/Django",
+    // },
     {
       title: "Task Management App",
       description:
         "Created a task management app with CRUD operations using Kotlin.",
       image: `${ToDo}`,
       github: "https://github.com/supuntharindu123/TaskmanagementApp",
-    },
-    {
-      title: "YouTube Clone",
-      description: "Created YouTube Clone using YouTube Data Api and React.",
-      image: `${MyTube}`,
-      github: "https://github.com/supuntharindu123/mytube",
     },
     {
       title: "YouTube Clone",
