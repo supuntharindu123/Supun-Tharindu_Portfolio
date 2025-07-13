@@ -335,7 +335,7 @@ function Home() {
               </a>
             </div>
           </div>
-          <div className="py-12 bg-gray-200 dark:bg-slate-900">
+          <div className="py-12 bg-gray-200 dark:bg-slate-900" id="projects">
             <h1 className="mb-10 text-4xl font-extrabold text-center sm:text-5xl md:text-6xl lg:text-7xl text-slate-800 dark:text-white bounce-in">
               My Projects
             </h1>
@@ -452,7 +452,7 @@ function Home() {
                 className="p-6 bg-white border shadow-xl myblock shadow-grey-500 lg:-ml-24 lg:mr-24 dark:bg-slate-700 rounded-xl zoom-in glow-hover"
               >
                 {visible && msg && (
-                  <p className="w-full px-4 py-2 mb-3 text-xl font-bold text-center bg-white rounded-sm bounce-in pulse-glow">
+                  <p className="w-full px-4 py-2 mb-3 text-xl font-bold text-center bg-gray-300 rounded-sm bounce-in pulse-glow">
                     {msg}
                   </p>
                 )}
