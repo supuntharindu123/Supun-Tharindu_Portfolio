@@ -1,19 +1,11 @@
 import "./App.css";
-
 import Home from "./components/home";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
-  const [mytheme, setMytheme] = useState("");
-  useEffect(() => {
-    const mythemes = localStorage.getItem("theme");
-    setMytheme(mythemes);
-    console.log(mythemes);
-  }, []);
-
   return (
-    <>
+    <ThemeProvider>
       <div>
         <BrowserRouter>
           <Routes>
@@ -28,7 +20,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 

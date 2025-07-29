@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../../src/App.css";
 import NavBar from "./nav";
 import Footer from "./footer";
+import { useTheme } from "../contexts/ThemeContext";
 import Me from "../images/me8.png";
 import HTML from "../images/html.png";
 import CSS from "../images/css.png";
@@ -20,6 +21,11 @@ import Sqlite from "../images/sqllite.png";
 import Socket from "../images/socket.png";
 import NET from "../images/NET.png";
 import Spring from "../images/Spring.png";
+import AWS from "../images/aws.png";
+import Vscode from "../images/vscode.png";
+import Github from "../images/github.png";
+import Postman from "../images/postman.png";
+import Figma from "../images/figma.png";
 import Livechat from "../images/livechat.png";
 import Djangopython from "../images/djangopython.png";
 import Image from "../images/portfolio.png";
@@ -38,14 +44,21 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
+import { FaGraduationCap } from "react-icons/fa";
+import { FaCertificate } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaPhone } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 
 function Home() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const { isDarkMode, toggleTheme } = useTheme();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [msg, setMsg] = useState("");
   const [visible, setVisible] = useState(false);
+  const [activeSkillFilter, setActiveSkillFilter] = useState("webDevelopment");
 
   // Typing animation state
   const [typedText, setTypedText] = useState("");
@@ -54,8 +67,9 @@ function Home() {
 
   const words = [
     "Undergraduate at SLIIT",
-
     "Specialized in Information Technology",
+    "Software Enginner",
+    "Full Stack Developer",
   ];
 
   // Typing animation effect
@@ -101,6 +115,7 @@ function Home() {
         "Built a comprehensive Shopping Mall Management System to streamline operations and enhance user engagement",
       image: `${MallApp}`,
       github: "https://github.com/supuntharindu123/ITPM",
+      skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind Css"],
     },
     {
       title: "Resume Analyzer",
@@ -108,6 +123,7 @@ function Home() {
         "Developed a full-stack AI-powered Resume Analysis system designed to revolutionize hiring by precisely matching resumes to job descriptions, optimizing recruitment processes, and assisting job seekers",
       image: `${Resume}`,
       github: "https://github.com/supuntharindu123/AIResumeAnalyzer",
+      skills: ["React", "Node.js", "MongoDB", "Express.js", "Flask", "NLP"],
     },
     {
       title: "Advance Task Manegement App",
@@ -115,6 +131,7 @@ function Home() {
         " Developed a full-stack Task Management System with advanced features for efficient workflow and collaboration.",
       image: `${TaskApp}`,
       github: "https://github.com/supuntharindu123/Task-Management-WebApp",
+      skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
     },
     {
       title: "Vehicle Advertisement System",
@@ -122,6 +139,7 @@ function Home() {
         "Developed a web-based Vehicle Advertisement system with filter ads, post ads (with validations), user authentication, and a responsive UI.",
       image: `${Image1}`,
       github: "https://github.com/supuntharindu123/Vehical-Ads",
+      skills: ["Django", "HTML", "Bootstrap", "JavaScript", "MySQL"],
     },
     {
       title: "My Portfolio",
@@ -129,6 +147,7 @@ function Home() {
         "I am Supun Tharindu Kumarasena, a third-year undergraduate student at SLIIT, pursuing a degree in Information Technology.",
       image: `${Image}`,
       github: "#",
+      skills: ["React.js", "Tailwind CSS", "Vite", "JavaScript"],
     },
     {
       title: "Social Media Platform",
@@ -136,6 +155,7 @@ function Home() {
         "User authentication (live validations), Messaging, Post creation, Following & Followers, and Profile management.",
       image: `${Social}`,
       github: "https://github.com/supuntharindu123/MYAPP",
+      skills: ["HTML", "Node.js", "MongoDB", "Socket.io", "Bootstrap"],
     },
     {
       title: "Live Chat Application",
@@ -143,6 +163,14 @@ function Home() {
         "Developed a live chat application with send, delete, and edit messages, along with user authentication.",
       image: `${Livechat}`,
       github: "https://github.com/supuntharindu123/livechat_web_application",
+      skills: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "Socket.io",
+        "MongoDB",
+        "Tailwind Css",
+      ],
     },
     // {
     //   title: "User Management System",
@@ -150,6 +178,7 @@ function Home() {
     //     "Developed a user record management system with full CRUD operations using Django.",
     //   image: `${Djangopython}`,
     //   github: "https://github.com/supuntharindu123/Django",
+    //   skills: ["Python", "Django", "SQLite", "HTML", "CSS"],
     // },
     {
       title: "Task Management App",
@@ -157,41 +186,123 @@ function Home() {
         "Created a task management app with CRUD operations using Kotlin.",
       image: `${ToDo}`,
       github: "https://github.com/supuntharindu123/TaskmanagementApp",
+      skills: ["Kotlin", "Android", "SQLite", "XML"],
     },
     {
       title: "YouTube Clone",
       description: "Created YouTube Clone using YouTube Data Api and React.",
       image: `${MyTube}`,
       github: "https://github.com/supuntharindu123/mytube",
+      skills: ["React.js", "YouTube API", "CSS", "JavaScript"],
     },
   ];
 
-  const themeChange = () => {
-    setTheme(!theme);
-    localStorage.setItem("theme", !theme);
-  };
-  const mytheme = localStorage.getItem("theme");
-  console.log("mytheme", mytheme);
+  const education = [
+    {
+      institution: "Sri Lanka Institute of Information Technology (SLIIT)",
+      degree: "BSc (Hons) in Information Technology",
+      specialization: "Information Technology",
+      period: "2022 - Present",
+      status: "Fourth Year Undergraduate",
+      gpa: "",
+      description:
+        "Specialized in Information Technology with focus on full-stack development, database management, and software architecture.",
+      certificates: [],
+    },
+    {
+      institution: "Online Platforms & Certifications",
+      degree: "Professional Certifications",
+      specialization: "Web Development & Programming",
+      period: "2024 - Present",
+      status: "Continuous Learning",
+      description:
+        "Completed various online courses and earned certifications in modern web technologies and programming languages.",
+      certificates: [
+        {
+          name: "AWS Eduacate Indroduction To Cloud 101 - AWS",
+          link: "#",
+          type: "certificate",
+        },
 
-  const skillsData = [
-    { name: "HTML", icon: HTML },
-    { name: "CSS", icon: CSS },
-    { name: "JavaScript", icon: Js },
-    { name: "Java", icon: Java },
-    { name: "React", icon: Reactimg },
-    { name: "Node.js", icon: Nodejs },
-    { name: "Python", icon: Python },
-    { name: "Django", icon: Django },
-    { name: "SQLite", icon: Sqlite },
-    { name: "MySQL", icon: Mysql },
-    { name: "MongoDB", icon: MongoDb },
-    { name: "Tailwind CSS", icon: Tailwind },
-    { name: "Bootstrap", icon: Bootstrap },
-    { name: "Kotlin", icon: Kotlin },
-    { name: "Socket.io", icon: Socket },
-    { name: ".NET Core", icon: NET },
-    { name: "Spring-Boot", icon: Spring },
+        {
+          name: "Learn JavaScripts:Full-Stack from Scratch - Udemy",
+          link: "#",
+          type: "certificate",
+        },
+        {
+          name: "Django Web Framework - Meta",
+          link: "#",
+          type: "certificate",
+        },
+        {
+          name: "The Complete MongoDB Course - Udemy",
+          link: "#",
+          type: "certificate",
+        },
+
+        {
+          name: "Web Design For Beginners - CODL",
+          link: "#",
+          type: "certificate",
+        },
+      ],
+    },
+    {
+      institution: "Rajapaksha Central College | Weeraketiya",
+      degree: "G.C.E Advanced Level",
+      specialization: "Maths",
+      period: "2019 - 2021",
+      status: "Completed",
+      gpa: "B,B,C Passes",
+      description:
+        "Completed Advanced Level examination with Maths at Rajapaksha Central College, Weeraketiya, achieving 3 passes.",
+      certificates: [],
+    },
   ];
+
+  const skillsData = {
+    webDevelopment: [
+      { name: "React", icon: Reactimg },
+
+      { name: "HTML", icon: HTML },
+      { name: "CSS", icon: CSS },
+      { name: "JavaScript", icon: Js },
+      { name: "Tailwind CSS", icon: Tailwind },
+      { name: "Bootstrap", icon: Bootstrap },
+      { name: "Socket.io", icon: Socket },
+    ],
+    fullStackProjects: [
+      { name: "Node.js", icon: Nodejs },
+      { name: "Python", icon: Python },
+      { name: "Django", icon: Django },
+      { name: "Java", icon: Java },
+      { name: ".NET Core", icon: NET },
+      { name: "Spring-Boot", icon: Spring },
+    ],
+    mobileAndDesktop: [
+      { name: "MySQL", icon: Mysql },
+      { name: "MongoDB", icon: MongoDb },
+      { name: "SQLite", icon: Sqlite },
+    ],
+    developmentTools: [
+      { name: "Github", icon: Github },
+      { name: "Vscode", icon: Vscode },
+      { name: "Postman", icon: Postman },
+      { name: "AWS", icon: AWS },
+      { name: "Figma", icon: Figma },
+    ],
+  };
+
+  const skillCategories = {
+    webDevelopment: "Frontend",
+    fullStackProjects: "Backend",
+    mobileAndDesktop: "Databases",
+    developmentTools: "Development Tools",
+  };
+
+  const getFilteredSkills = () => {
+    return { [activeSkillFilter]: skillsData[activeSkillFilter] };
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -225,311 +336,603 @@ function Home() {
 
   return (
     <>
-      <button
-        onClick={themeChange}
-        className={`absolute ms-80 border-5 border-black border my-3 p-2 mt-5 rounded-md font-bold shadow text-2 xl ${
-          mytheme === "true" ? "bg-slate-100 font-bold border " : "bg-gray-50"
-        }`}
-      >
-        {mytheme === "true" ? <MdLightMode /> : <MdDarkMode></MdDarkMode>}
-      </button>
-      <div className={`${mytheme === "true" && "dark"} `}>
+      <div className={isDarkMode ? "dark" : ""}>
         <NavBar></NavBar>
 
-        <div className="bg-gray-300 dark:bg-slate-900">
-          <div className="flex flex-col items-center justify-center h-auto lg:flex-row ">
-            <div className="flex flex-col justify-center m-6 lg:items-center lg:-mr-80 lg:ml-[200px]">
-              <h1 className="text-4xl font-extrabold text-black hello bounce-in sm:text-5xl md:text-6xl lg:text-6xl xl:text-8xl dark:text-white animate-bounce">
-                Welcome !
+        <div className="">
+          <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-200 lg:flex-row lg:px-8 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-900 ">
+            <div className="flex flex-col justify-center w-full max-w-2xl lg:w-1/2 lg:pr-8 lg:-mr-12">
+              <h1 className="text-4xl font-black text-center text-transparent font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-950 hello bounce-in sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700 animate-bounce">
+                WELCOME !
               </h1>
-              <h2 className="my-4 text-2xl font-bold hello slide-in-left sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl dark:text-white lg:text-center">
+              <h2 className="my-4 text-2xl font-bold text-center text-black transition-colors duration-300 font-heading hello slide-in-left bg-clip-text sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-600 dark:to-slate-400">
                 I'm Supun Tharindu Kumarasena
               </h2>
-              <h3 className="text-lg sm:text-xl md:text-2xl dark:text-white lg:text-center hello typing-container slide-in-right">
-                <span className="text-transparent text-gradient bg-gradient-to-r from-blue-800 to-purple-800 dark:from-gray-200 dark:to-purple-800 bg-clip-text ">
+              <h3 className="text-base font-medium text-center transition-colors duration-300 font-body sm:text-lg md:text-xl lg:text-2xl xl:text-3xl hello typing-container slide-in-right">
+                <span className="text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
                   {typedText}
                 </span>
-                <span className="ml-1 text-blue-500 blinking-cursor">|</span>
               </h3>
-              <div className="flex flex-row items-center mt-8 hello lg:justify-center slide-in-up">
+              <div className="flex flex-wrap justify-center gap-3 mt-8 hello slide-in-up">
                 <a
                   href="https://github.com/supuntharindu123"
-                  className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
                 >
                   <FaGithub className="hover:animate-bounce"></FaGithub>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/supun-tharindu/"
-                  className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
                 >
                   <CiLinkedin className="hover:animate-bounce"></CiLinkedin>
                 </a>
                 <a
                   href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
-                  className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
                 >
                   <FaFacebook className="hover:animate-bounce"></FaFacebook>
                 </a>
                 <a
                   href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr "
-                  className="p-3 mx-3 text-2xl border border-black rounded-full dark:border-white dark:text-white hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
                 >
                   <FaInstagramSquare className="hover:animate-bounce"></FaInstagramSquare>
                 </a>
               </div>
-              <a
-                href={myCv}
-                download={myCv}
-                className="w-48 px-8 py-2 mt-6 text-lg font-semibold border-2 border-gray-500 shadow hello sm:px-16 sm:text-2xl sm:w-80 dark:border-white rounded-xl dark:text-white hover:bg-slate-600 hover:text-white zoom-in pulse-glow"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  Download CV
-                  <FaDownload className="text-lg sm:text-xl hover:animate-bounce wiggle" />
-                </span>
-              </a>
+              <div className="flex flex-col items-center w-full gap-3 mt-8 sm:flex-row sm:justify-center">
+                <a
+                  href={myCv}
+                  download={myCv}
+                  className="w-full px-6 py-3 text-base font-semibold text-white transition-all duration-300 border-2 border-gray-500 rounded-full shadow bg-slate-900 hello sm:w-auto sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:hover:text-black hover:bg-white hover:text-black dark:hover:bg-emerald-300"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Download CV
+                    <FaDownload className="text-sm sm:text-base hover:animate-bounce wiggle" />
+                  </span>
+                </a>{" "}
+                <a
+                  href="#contact"
+                  className="w-full px-6 py-3 text-base font-semibold text-center text-black transition-all duration-300 border-2 border-gray-500 rounded-full shadow hover:bg-stone-900 bg-slate-100 hello sm:w-auto sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:bg-slate-800 dark:hover:bg-emerald-300 dark:hover:text-black hover:text-white"
+                >
+                  Let's Connect!
+                </a>
+              </div>
             </div>
-            <div className="hello flex flex-row items-center justify-center lg:ml-[300px] float">
+            <div className="flex items-center justify-center w-full mt-8 lg:-mr-32 lg:w-1/2 lg:mt-0">
               <img
                 src={Me}
-                className="lg:w-[600px] lg:h-[750px] brightness-95 contrast-125 hover:scale-105 transition-transform duration-300"
-              ></img>
+                className="w-64 h-80 sm:w-80 sm:h-96 md:w-96 md:h-[480px] lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[750px] brightness-95 contrast-125 transition-transform duration-300 object-cover"
+                alt="Supun Tharindu"
+              />
             </div>
           </div>
           <div
-            className="flex flex-col items-center justify-center pt-10 pb-10 bg-gray-400 lg:columns-2 lg:flex-row dark:bg-slate-800 md:columns-1 "
+            className="flex-col items-center justify-center px-4 py-10 bg-white lg:px-8 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800 "
             id="about"
           >
-            <div className="lg:w-[50%] justify-center flex myblock slide-in-left">
-              <h1 className="mb-5 font-extrabold text-4xl sm:text-5xl md:text-6xl xl:text-8xl lg:text-7xl dark:text-white lg:w-[30%] text-center bounce-in">
-                About Me
+            <div className="w-full mb-8 lg:mb-0 lg:pr-8">
+              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+                ABOUT ME
               </h1>
             </div>
-            <div className="lg:w-[50%] flex flex-col justify-center myblock slide-in-right">
-              <p className="p-6 mr-4 text-lg font-semibold transition-transform duration-300 border shadow select-none sm:p-12 sm:mr-16 sm:text-lg md:text-lg rounded-xl lg:text-lg/10 ms-9 dark:text-white lg:-ms-24 text-slate-800 dark:bg-slate-800 bg-slate-100 zoom-in hover:scale-105">
-                I am Supun Tharindu Kumarasena, a highly motivated Full Stack
-                Developer and third-year undergraduate pursuing a BSc (Hons) in
-                Information Technology at SLIIT, Sri Lanka. With a strong
-                foundation in software engineering principles and
-                object-oriented programming, I specialize in building dynamic,
-                end-to-end web and mobile applications that solve real-world
-                problems.
-                <br />
-                I am proficient in a broad range of technologies, including
-                React.js, Node.js, Django, Spring Boot, and Kotlin, and I have
-                hands-on experience working with both SQL and NoSQL databases.
-                <br />
-                I am currently seeking a Software Engineer Internship where I
-                can contribute my technical expertise, creativity, and
-                dedication to impactful projects. I am passionate about learning
-                new tools and frameworks—especially cloud technologies such as
-                AWS—and committed to delivering clean, efficient code that
-                aligns with best practices.
+            <div className="flex flex-col items-center justify-center w-3/4 m-auto ">
+              <p className="p-4 mb-8 text-base font-semibold transition-transform duration-300 bg-gray-100 border shadow select-none font-body sm:p-6 md:p-8 sm:text-lg md:text-xl rounded-xl text-slate-800 dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-slate-300 bg-clip-text dark:bg-black zoom-in hover:scale-105">
+                Hi, I’m Supun Tharindu — a dedicated fourth-year undergraduate
+                at SLIIT, specializing in Information Technology. I’m passionate
+                about full-stack development and skilled in modern technologies
+                like React.js, Node.js, Django, and Spring Boot.
+                <br /> Currently, I’m expanding my expertise in AWS cloud
+                services and .NET development to become a more versatile
+                software engineer.
+                <br /> I enjoy solving real-world problems, continuously
+                learning, and building meaningful, user-focused applications.
+                I’m actively seeking an <b>internship opportunity</b> to grow my
+                experience and contribute to a dynamic development team.
                 <br />
                 Thank you!
               </p>
-              <a
-                href="#contact"
-                className="w-64 px-8 py-3 mt-8 ml-10 text-xl font-bold text-center text-white transition-colors duration-300 border rounded-lg shadow-lg myblock border-slate-900 dark:bg-slate-800 lg:-ms-24 hover:bg-slate-950 bg-sky-800 hover:border-white pulse-glow glow-hover"
-              >
-                Let's Connect!
-              </a>
+              <div className="flex justify-end w-full">
+                <a
+                  href="#contact"
+                  className="px-6 py-3 text-base font-semibold text-white transition-all duration-300 border-2 border-gray-500 rounded-full shadow bg-slate-900 hello sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:hover:text-black hover:bg-white hover:text-black dark:hover:bg-emerald-300"
+                >
+                  Let's Connect!
+                </a>
+              </div>
             </div>
           </div>
-          <div className="py-12 bg-gray-200 dark:bg-slate-900" id="projects">
-            <h1 className="mb-10 text-4xl font-extrabold text-center sm:text-5xl md:text-6xl lg:text-7xl text-slate-800 dark:text-white bounce-in">
-              My Projects
-            </h1>
-            <div className="container grid grid-cols-1 gap-8 px-6 mx-auto md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg myblock dark:bg-slate-800 hover:shadow-none hover:border-neutral-600 zoom-in "
-                >
-                  <img
-                    src={project.image}
-                    className="object-cover w-full transition-transform duration-300 rounded-t-lg h-52 hover:scale-110"
-                    alt={project.title}
-                  />
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold text-center dark:text-white slide-in-up">
-                      {project.title}
-                    </h2>
-                    <p className="mt-3 mb-5 text-lg text-center dark:text-white fade-in-stagger">
-                      {project.description}
-                    </p>
-                    <div className="flex justify-center">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center w-full py-2 font-bold text-center transition-colors duration-300 bg-white border rounded-lg shadow-md hover:bg-slate-900 hover:text-white glow-hover pulse-glow"
-                      >
-                        GitHub{" "}
-                        <FaGithub className="ml-2 text-xl rotate-hover" />
-                      </a>
+          <div
+            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
+            id="education"
+          >
+            <div className="container mx-auto">
+              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+                EDUCATION
+              </h1>
+
+              {/* Education List */}
+              <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+                {education.map((edu, index) => (
+                  <div
+                    key={index}
+                    className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-gray-600 myblock ${
+                      index === 0
+                        ? "slide-in-left"
+                        : index === 1
+                        ? "slide-in-up"
+                        : "slide-in-right"
+                    }`}
+                    style={{ animationDelay: `${index * 0.2}s` }}
+                  >
+                    {/* Timeline Dot */}
+                    <div className="absolute left-[-10px] top-0">
+                      <div className="flex items-center justify-center w-4 h-4 bg-black rounded-full shadow-lg md:w-5 md:h-5 dark:bg-emerald-800">
+                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
+                      </div>
+                    </div>
+
+                    {/* Education Content */}
+                    <div className="ml-2 md:ml-4">
+                      {/* Institution and Period */}
+                      <div className="flex flex-col gap-2 mb-3 md:flex-row md:items-center md:justify-between">
+                        <h2 className="text-lg font-bold text-black md:text-xl lg:text-2xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                          {edu.institution}
+                        </h2>
+                        <span className="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full md:px-3 md:text-sm dark:text-emerald-300 dark:bg-emerald-900">
+                          <FaCalendarAlt className="inline mr-1" />
+                          {edu.period}
+                        </span>
+                      </div>
+
+                      {/* Degree and Specialization */}
+                      <h3 className="mb-2 text-base font-semibold text-black md:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                        {edu.degree}
+                      </h3>
+                      {edu.specialization && (
+                        <p className="mb-3 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                          <strong>Specialization:</strong> {edu.specialization}
+                        </p>
+                      )}
+
+                      {/* Status and GPA */}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <span className="px-2 py-1 text-xs font-medium text-white bg-black rounded-full dark:bg-green-500 md:px-3 md:text-sm">
+                          {edu.status}
+                        </span>
+                        {edu.gpa && (
+                          <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-stone-800 dark:bg-emerald-600 md:px-3 md:text-sm">
+                            {edu.gpa}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Description */}
+                      <p className="mb-4 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                        {edu.description}
+                      </p>
+
+                      {/* Certificates */}
+                      {edu.certificates && edu.certificates.length > 0 && (
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 mb-2">
+                            <FaCertificate className="text-gray-500" />
+                            <span className="text-sm font-medium text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                              Certificates ({edu.certificates.length}):
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {edu.certificates.map((cert, certIndex) => (
+                              <a
+                                key={certIndex}
+                                href={cert.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-white transition-all duration-300 bg-black rounded-full md:px-3 md:text-sm dark:bg-gradient-to-r dark:from-emerald-700 dark:to-emerald-600 hover:from-gray-600 hover:to-emerald-700 hover:scale-105"
+                              >
+                                <span>{cert.name}</span>&nbsp;
+                                <FaExternalLinkAlt className="text-xs" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+          </div>
+          <div
+            className="px-4 py-12 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+            id="projects"
+          >
+            <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+              MY PROJECTS
+            </h1>
+            <div className="container mx-auto">
+              <div className="flex gap-4 pb-6 overflow-x-auto md:gap-6 lg:gap-8 projects-scroll snap-x snap-mandatory">
+                {projects.map((project, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col flex-shrink-0 transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg dark:border-emerald-950 dark:hover:border-emerald-800 w-72 sm:w-80 md:w-96 myblock dark:bg-black hover:shadow-none hover:border-neutral-600 zoom-in snap-center"
+                  >
+                    <img
+                      src={project.image}
+                      className="object-cover w-full transition-transform duration-300 rounded-t-lg h-44 sm:h-48 md:h-52 hover:scale-110"
+                      alt={project.title}
+                    />
+                    <div className="flex flex-col justify-between h-full p-4 md:p-6">
+                      <div>
+                        <h2 className="text-lg font-black text-center font-heading dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text slide-in-up sm:text-xl md:text-2xl">
+                          {project.title}
+                        </h2>
+                        <p className="mt-3 mb-4 text-sm font-medium text-center font-body dark:text-emerald-200 fade-in-stagger sm:text-base md:text-lg">
+                          {project.description}
+                        </p>
+
+                        {/* Skills Tags */}
+                        <div className="flex flex-wrap justify-center gap-2 mb-4">
+                          {project.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="px-2 py-1 text-xs font-semibold text-white bg-black rounded-full dark:bg-emerald-400 dark:text-gray-700 sm:text-sm"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex justify-center mt-auto">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center w-full py-2 text-sm font-bold text-center transition-colors duration-300 bg-white border rounded-lg shadow-md dark:bg-emerald-700 sm:text-base hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black"
+                        >
+                          GitHub{" "}
+                          <FaGithub className="ml-2 text-lg sm:text-xl rotate-hover" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="flex justify-center mt-4">
+                <p className="text-xs text-gray-600 sm:text-sm dark:text-gray-400 animate-pulse">
+                  ← Scroll horizontally to see more projects →
+                </p>
+              </div>
             </div>
           </div>
           <div
             id="skills"
-            className="flex flex-col items-center justify-center py-12 bg-gray-400 lg:flex-row dark:bg-slate-800"
+            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
           >
-            <div className="lg:w-[40%] justify-center flex animate-slide-in">
-              <h1 className="text-4xl font-extrabold text-center myblock sm:text-5xl md:text-6xl lg:text-8xl dark:text-white text-slate-800 lg:ml-60 bounce-in ">
-                <span className="block mb-3 lg:mx-4 slide-in-left">My</span>
-                <span className="bg-clip-text slide-in-right">Skills</span>
+            <div className="container mx-auto">
+              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+                MY SKILLS
               </h1>
-            </div>
-            <div className="lg:w-[60%] flex flex-wrap justify-center pr-6 lg:mr-40 animate-fade-in">
-              {skillsData.map((skill, index) => (
-                <div
-                  key={index}
-                  className="relative m-5 transition-transform duration-300 transform myblock group hover:scale-110 zoom-in rotate-hover heartbeat"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="object-contain w-28 h-28 float glow-hover"
-                  />
 
-                  <div className="absolute hidden px-2 py-1 mb-2 text-sm text-white bg-black rounded-md bottom-full group-hover:block fade-in-stagger">
-                    {skill.name}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div
-            id="contact"
-            className="flex flex-col items-center justify-center py-12 bg-gray-200 lg:columns-2 lg:flex-row dark:bg-slate-700 md:columns-1"
-          >
-            <div className="lg:w-[50%] justify-center flex flex-col items-center slide-in-left">
-              <h1 className="myblock shadow-slate-900 text-gray-800 font-extrabold text-4xl sm:text-5xl md:text-6xl xl:text-8xl lg:text-7xl dark:text-white lg:w-[30%] text-center lg:mr-56 xl:mr-88 bounce-in">
-                Contact
-              </h1>
-              <div className="flex flex-col justify-start ">
-                <p className="max-w-md mt-6 text-xl text-center text-gray-600 myblock lg:text-center dark:text-gray-300 fade-in-stagger">
-                  Have a question? Contact
-                </p>
+              {/* Filter Buttons */}
+              <div className="flex flex-wrap justify-center gap-2 mb-12 sm:gap-4">
+                {Object.entries(skillCategories).map(([key, label]) => (
+                  <button
+                    key={key}
+                    onClick={() => setActiveSkillFilter(key)}
+                    className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-300 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
+                      activeSkillFilter === key
+                        ? "bg-black dark:bg-emerald-600 text-white  shadow-lg"
+                        : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 "
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
 
-                <div className="flex justify-center mt-8 space-x-6 myblock lg:justify-start slide-in-up">
-                  <a
-                    href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-800 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 rotate-hover glow-hover float"
-                  >
-                    <FaFacebook className="text-6xl heartbeat"></FaFacebook>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/supun-tharindu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-800 transition-colors duration-300 dark:text-gray-300 hover:text-blue-800 rotate-hover glow-hover float"
-                    style={{ animationDelay: "0.2s" }}
-                  >
-                    <CiLinkedin className="text-7xl heartbeat"></CiLinkedin>
-                  </a>
-                  <a
-                    href="https://github.com/supuntharindu123"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-800 transition-colors duration-300 dark:text-gray-300 hover:text-gray-950 rotate-hover glow-hover float"
-                    style={{ animationDelay: "0.4s" }}
-                  >
-                    <FaGithub className="text-6xl heartbeat"></FaGithub>
-                  </a>
-                </div>
+              <div className="flex flex-row items-center justify-center ">
+                {Object.entries(getFilteredSkills()).map(
+                  ([categoryKey, skills]) => {
+                    const categoryConfig = {
+                      webDevelopment: {
+                        title: "Frontend Technologies",
+                        color: "text-blue-600 dark:text-blue-400",
+                        animation: "slide-in-left",
+                      },
+                      fullStackProjects: {
+                        title: "Backend Technologies",
+                        color: "text-green-600 dark:text-green-400",
+                        animation: "slide-in-up",
+                      },
+                      mobileAndDesktop: {
+                        title: "Databases Technologies",
+                        color: "text-purple-600 dark:text-purple-400",
+                        animation: "slide-in-right",
+                      },
+                      developmentTools: {
+                        title: "Development Tools",
+                        color: "text-orange-600 dark:text-orange-400",
+                        animation: "slide-in-left",
+                      },
+                    };
+
+                    const config = categoryConfig[categoryKey];
+
+                    return (
+                      <div
+                        key={categoryKey}
+                        className={`myblock ${config.animation} w-full max-w-4xl `}
+                      >
+                        <div className="p-4 transition-shadow duration-300 bg-white shadow-xl sm:p-6 md:p-8 dark:bg-black rounded-xl hover:shadow-2xl">
+                          <h2
+                            className={`mb-6 text-xl font-bold text-center sm:text-2xl md:text-3xl text-black dark:text-emerald-100 bounce-in`}
+                          >
+                            {config.title}
+                          </h2>
+                          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 sm:gap-4 justify-items-center">
+                            {skills.map((skill, index) => (
+                              <div
+                                key={index}
+                                className="flex flex-col items-center p-3 transition-transform duration-300 rounded-lg sm:p-4 bg-gray-50 dark:bg-slate-600 hover:scale-105 group zoom-in"
+                                style={{
+                                  animationDelay: `${index * 0.1}s`,
+                                }}
+                              >
+                                <img
+                                  src={skill.icon}
+                                  alt={skill.name}
+                                  className="object-contain w-12 h-12 mb-2 sm:w-16 sm:h-16 md:w-20 md:h-20"
+                                />
+                                <span className="text-xs font-semibold text-center text-gray-800 sm:text-sm md:text-base dark:text-white">
+                                  {skill.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             </div>
-            <div className="lg:w-[40%] w-[80%] mt-6 slide-in-right">
-              <form
-                onSubmit={onSubmit}
-                className="p-6 bg-white border shadow-xl myblock shadow-grey-500 lg:-ml-24 lg:mr-24 dark:bg-slate-700 rounded-xl zoom-in glow-hover"
-              >
-                {visible && msg && (
-                  <p className="w-full px-4 py-2 mb-3 text-xl font-bold text-center bg-gray-300 rounded-sm bounce-in pulse-glow">
-                    {msg}
+          </div>
+
+          {/* Contact Content Section */}
+          <div
+            id="contact"
+            className="flex flex-col px-4 py-16 bg-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+          >
+            <div className="flex flex-row mb-16">
+              <div className="container mx-auto text-center">
+                <h1 className="mb-4 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+                  CONTACT ME
+                </h1>
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-center lg:flex-row ">
+              <div className="w-full mb-8 lg:w-1/2 lg:mb-0 lg:pr-8">
+                <div className="flex flex-col items-center justify-center">
+                  <p className="max-w-md text-lg text-center text-black font-body sm:text-xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text fade-in-stagger lg:text-left">
+                    Let's collaborate and bring your ideas to life! Reach out
+                    for opportunities, projects, or just to say hello.
                   </p>
-                )}
-                <div className="mb-10 fade-in-stagger">
-                  <label
-                    className="text-2xl font-bold text-gray-600 dark:text-white"
-                    for="name"
-                  >
-                    Your Name&nbsp;
-                    <span className="text-lg text-red-600">*</span>
-                  </label>
-                  <br></br>
-                  <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    required
-                    placeholder="Enter Your Name"
-                    className="w-full h-10 pl-3 mt-4 text-2xl transition-transform duration-300 border rounded shadow-md dark:shadow-white "
-                  ></input>
+
+                  <div className="mt-6 space-y-3 lg:space-y-4">
+                    <div className="flex items-center justify-center gap-3 lg:justify-start">
+                      <div className="w-2 h-2 bg-black rounded-full dark:bg-emerald-500"></div>
+                      <span className="text-base text-black sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                        Available for internships & freelance projects
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center gap-3 lg:justify-start">
+                      <div className="w-2 h-2 bg-black rounded-full dark:bg-emerald-500"></div>
+                      <span className="text-base text-black sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                        Quick response within 24 hours
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Contact Information */}
+                  <div className="mt-8 space-y-4">
+                    <div className="flex items-center justify-center gap-3 lg:justify-start">
+                      <FaPhone className="text-lg text-black dark:text-emerald-500" />
+                      <a
+                        href="tel:+94701234567"
+                        className="text-base text-black transition-all duration-300 sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text hover:underline"
+                      >
+                        +94 76 0426423
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-center gap-3 lg:justify-start">
+                      <FaEnvelope className="text-lg text-black dark:text-emerald-500" />
+                      <a
+                        href="mailto:supuntharindu1125@gmail.com"
+                        className="text-base text-black transition-all duration-300 sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text hover:underline"
+                      >
+                        supuntharindu1125@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center gap-6 mt-10 lg:justify-start slide-in-up sm:gap-8">
+                    <a
+                      href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-500 hover:border-blue-500 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
+                    >
+                      <FaFacebook className="text-2xl heartbeat"></FaFacebook>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/supun-tharindu/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-700 hover:border-blue-700 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
+                      style={{ animationDelay: "0.2s" }}
+                    >
+                      <CiLinkedin className="text-2xl heartbeat"></CiLinkedin>
+                    </a>
+                    <a
+                      href="https://github.com/supuntharindu123"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-gray-800 hover:border-gray-800 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
+                      style={{ animationDelay: "0.4s" }}
+                    >
+                      <FaGithub className="text-2xl heartbeat"></FaGithub>
+                    </a>
+                    <a
+                      href="ttps://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-gray-800 hover:border-gray-800 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
+                      style={{ animationDelay: "0.4s" }}
+                    >
+                      <FaInstagramSquare className="text-2xl heartbeat"></FaInstagramSquare>
+                    </a>
+                  </div>
                 </div>
-                <div
-                  className="mb-10 fade-in-stagger"
-                  style={{ animationDelay: "0.1s" }}
-                >
-                  <label
-                    className="text-2xl font-bold text-gray-600 dark:text-white"
-                    for="name"
+              </div>
+              <div className="w-full lg:w-1/2">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-xl blur opacity-20"></div>
+                  <form
+                    onSubmit={onSubmit}
+                    className="relative p-6 bg-gray-300 border-2 border-gray-400 shadow-2xl sm:p-8 dark:bg-black dark:border-emerald-300 rounded-xl"
                   >
-                    Your Email&nbsp;
-                    <span className="text-lg text-red-600">*</span>
-                  </label>
-                  <br></br>
-                  <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                    required
-                    placeholder="Enter Your Email Address"
-                    className="w-full h-10 pl-3 mt-4 text-2xl transition-transform duration-300 border rounded shadow-md dark:shadow-white "
-                  ></input>
+                    {visible && msg && (
+                      <div className="w-full px-6 py-4 mb-6 text-lg font-bold text-center transition-all duration-300 rounded-lg sm:text-xl ">
+                        <div
+                          className={`flex items-center justify-center gap-3 ${
+                            msg.includes("Success")
+                              ? "text-emerald-700 bg-emerald-100 border-2 border-emerald-300 dark:text-emerald-300 dark:bg-emerald-900 dark:border-emerald-600"
+                              : "text-red-700 bg-red-100 border-2 border-red-300 dark:text-red-300 dark:bg-red-900 dark:border-red-600"
+                          } rounded-lg p-4`}
+                        >
+                          {msg.includes("Success") ? (
+                            <svg
+                              className="w-6 h-6"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              className="w-6 h-6"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          )}
+                          {msg}
+                        </div>
+                      </div>
+                    )}
+                    <div className="mb-3 sm:mb-8 fade-in-stagger">
+                      <label
+                        className="text-lg font-bold text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text"
+                        htmlFor="name"
+                      >
+                        Your Name&nbsp;
+                        <span className="text-base dark:text-green-500 sm:text-lg">
+                          *
+                        </span>
+                      </label>
+                      <br></br>
+                      <input
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                        required
+                        placeholder="Enter Your Full Name"
+                        className="w-full h-10 pl-4 mt-2 transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md sm:text-lg dark:bg-emerald-950 dark:border-emerald-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
+                      ></input>
+                    </div>
+                    <div
+                      className="mb-3 sm:mb-8 fade-in-stagger"
+                      style={{ animationDelay: "0.1s" }}
+                    >
+                      <label
+                        className="text-lg font-bold text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text"
+                        htmlFor="email"
+                      >
+                        Your Email&nbsp;
+                        <span className="text-base dark:text-green-500 sm:text-lg">
+                          *
+                        </span>
+                      </label>
+                      <br></br>
+                      <input
+                        type="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                        required
+                        placeholder="Enter Your Email Address"
+                        className="w-full h-10 pl-4 mt-4 text-sm transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md sm:text-lg dark:bg-emerald-950 dark:border-emerald-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
+                      ></input>
+                    </div>
+                    <div
+                      className="mb-3 fade-in-stagger"
+                      style={{ animationDelay: "0.2s" }}
+                    >
+                      <label
+                        className="text-lg font-bold text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text"
+                        htmlFor="message"
+                      >
+                        Your Message&nbsp;
+                        <span className="text-base dark:text-green-500 sm:text-lg">
+                          *
+                        </span>
+                      </label>
+                      <br></br>
+                      <textarea
+                        name="message"
+                        rows={5}
+                        value={message}
+                        onChange={(e) => {
+                          setMessage(e.target.value);
+                        }}
+                        required
+                        placeholder="Tell me about your project, ideas, or just say hello..."
+                        className="w-full p-4 mt-4 text-lg transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md resize-none dark:border-emerald-900 dark:bg-emerald-950 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
+                      ></textarea>
+                    </div>
+                    <div className="flex justify-end mt-8">
+                      <button
+                        type="submit"
+                        className="px-8 py-2 text-lg font-bold text-white transition-all duration-300 bg-black border-2 rounded-lg shadow-lg dark:border-emerald-500 dark:bg-gradient-to-r dark:text-black dark:from-emerald-800 dark:to-emerald-700 dark:hover:from-emerald-600 dark:hover:to-emerald-700 hover:scale-105 hover:shadow-xl sm:px-12 sm:text-xl md:text-xl focus:ring-4 focus:ring-emerald-200 dark:focus:ring-emerald-700 "
+                      >
+                        <span className="flex items-center justify-center gap-3">
+                          Send
+                        </span>
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div className="mb-4 fade-in-stagger">
-                  <label
-                    className="text-2xl font-bold text-gray-600 dark:text-white"
-                    for="name"
-                  >
-                    Message&nbsp;
-                    <span className="text-lg text-red-600">*</span>
-                  </label>
-                  <br></br>
-                  <textarea
-                    type="text"
-                    name="message"
-                    rows={5}
-                    value={message}
-                    onChange={(e) => {
-                      setMessage(e.target.value);
-                    }}
-                    required
-                    placeholder="Enter Your Message..."
-                    className="w-full pl-3 mt-4 text-2xl transition-transform duration-300 bg-white border rounded shadow-md dark:shadow-white "
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="px-16 py-2 text-2xl font-bold text-white bg-gray-600 rounded-md shadow-md shadow-white hover:bg-slate-700 hover:text-white pulse-glow glow-hover "
-                >
-                  Send
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

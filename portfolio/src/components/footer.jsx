@@ -7,68 +7,85 @@ import { FaInstagramSquare } from "react-icons/fa";
 function Footer() {
   return (
     <div>
-      <footer className="p-3 pt-10 bg-slate-900">
-        <div className="flex justify-center mb-6 lg:flex-row md:flex-row sm:flex-row">
+      <footer className="px-4 py-8 bg-black border-t-2 sm:px-6 md:px-8 lg:px-12 xl:px-16 to-black dark:bg-gradient-to-br dark:from-gray-900 dark:via-black dark:to-gray-800 dark:border-emerald-300">
+        {/* Navigation Links */}
+        <div className="flex flex-col items-center justify-center gap-4 mb-8 sm:flex-row sm:flex-wrap sm:gap-6 md:gap-8 lg:gap-10">
           <a
-            className="mx-10 text-xl font-bold text-white sm:text-2xl hover:underline"
+            className="text-lg font-black text-white transition-colors duration-300 font-heading sm:text-xl md:text-2xl hover:underline hover:text-emerald-300 dark:text-emerald-200 dark:hover:text-emerald-300"
             href="#about"
           >
-            About
+            ABOUT
           </a>
           <a
-            className="mx-10 text-xl font-bold text-white sm:text-2xl hover:underline"
+            className="text-lg font-black text-white transition-colors duration-300 font-heading sm:text-xl md:text-2xl hover:underline hover:text-emerald-300 dark:text-emerald-200 dark:hover:text-emerald-300"
+            href="#education"
+          >
+            EDUCATION
+          </a>
+          <a
+            className="text-lg font-black text-white transition-colors duration-300 font-heading sm:text-xl md:text-2xl hover:underline hover:text-emerald-300 dark:text-emerald-200 dark:hover:text-emerald-300"
             href="#skills"
           >
-            Skills
+            SKILLS
           </a>
           <a
-            className="mx-10 text-xl font-bold text-white sm:text-2xl hover:underline"
+            className="text-lg font-black text-white transition-colors duration-300 font-heading sm:text-xl md:text-2xl hover:underline hover:text-emerald-300 dark:text-emerald-200 dark:hover:text-emerald-300"
             href="#projects"
           >
-            Projects
+            PROJECTS
           </a>
           <a
-            className="mx-10 text-xl font-bold text-white sm:text-2xl hover:underline"
+            className="text-lg font-black text-white transition-colors duration-300 font-heading sm:text-xl md:text-2xl hover:underline hover:text-emerald-300 dark:text-emerald-200 dark:hover:text-emerald-300"
             href="#contact"
           >
-            Contact
+            CONTACT
           </a>
         </div>
-        <div className="justify-center text-center mb-7">
-          <div className="flex flex-row items-center justify-center mt-4">
+
+        {/* Social Media Icons */}
+        <div className="flex justify-center mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
             <a
               target="_blank"
               href="https://github.com/supuntharindu123"
-              className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
+              className="p-2 text-xl text-white transition-all duration-300 border-2 border-white rounded-full sm:p-3 sm:text-2xl md:p-4 hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg dark:border-emerald-300 dark:hover:bg-emerald-300"
+              aria-label="GitHub"
             >
-              <FaGithub></FaGithub>
+              <FaGithub />
             </a>
             <a
               target="_blank"
               href="https://www.linkedin.com/in/supun-tharindu/"
-              className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
+              className="p-2 text-xl text-white transition-all duration-300 border-2 border-white rounded-full sm:p-3 sm:text-2xl md:p-4 hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg dark:border-emerald-300 dark:hover:bg-emerald-300"
+              aria-label="LinkedIn"
             >
-              <CiLinkedin></CiLinkedin>
+              <CiLinkedin />
             </a>
             <a
               target="_blank"
-              href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
-              className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
+              href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr"
+              className="p-2 text-xl text-white transition-all duration-300 border-2 border-white rounded-full sm:p-3 sm:text-2xl md:p-4 hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg dark:border-emerald-300 dark:hover:bg-emerald-300"
+              aria-label="Facebook"
             >
-              <FaFacebook></FaFacebook>
+              <FaFacebook />
             </a>
             <a
               target="_blank"
-              href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr "
-              className="p-3 mx-3 text-2xl text-white border border-white rounded-full hover:bg-slate-700 hover:text-white"
+              href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr"
+              className="p-2 text-xl text-white transition-all duration-300 border-2 border-white rounded-full sm:p-3 sm:text-2xl md:p-4 hover:bg-white hover:text-black hover:scale-110 hover:shadow-lg dark:border-emerald-300 dark:hover:bg-emerald-300"
+              aria-label="Instagram"
             >
-              <FaInstagramSquare></FaInstagramSquare>
+              <FaInstagramSquare />
             </a>
           </div>
         </div>
-        <p className="p-2 font-bold text-center text-white bg-slate-900">
-          Copyright © 2025 My Portfolio. All rights reserved.
-        </p>
+
+        {/* Copyright */}
+        <div className="pt-4 border-t border-gray-700 dark:border-emerald-300">
+          <p className="text-sm font-bold text-center text-white font-body sm:text-base md:text-lg">
+            COPYRIGHT © 2025 SUPUN THARINDU PORTFOLIO. ALL RIGHTS RESERVED.
+          </p>
+        </div>
       </footer>
     </div>
   );
