@@ -342,7 +342,7 @@ function Home() {
         <div className="">
           <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-200 lg:flex-row lg:px-8 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-900 ">
             <div className="flex flex-col justify-center w-full max-w-2xl lg:w-1/2 lg:pr-8 lg:-mr-12">
-              <h1 className="text-4xl font-black text-center text-transparent font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-950 hello bounce-in sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700 animate-bounce">
+              <h1 className="text-4xl font-black text-center text-transparent font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-950 hello bounce-in md:text-6xl lg:text-7xl xl:text-8xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700 animate-bounce">
                 WELCOME !
               </h1>
               <h2 className="my-4 text-2xl font-bold text-center text-black transition-colors duration-300 font-heading hello slide-in-left bg-clip-text sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-600 dark:to-slate-400">
