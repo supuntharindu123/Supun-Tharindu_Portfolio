@@ -37,7 +37,16 @@ import myCv from "../images/Supun_Tharindu_Kumarasena_CV_SE.pdf";
 import MallApp from "../images/MallApp.png";
 import Resume from "../images/Resume.png";
 import TaskApp from "../images/TaskApp.png";
+import SchoolProj from "../images/schoolmanagement.png";
+import TshirtProj from "../images/TshirtProj.png";
+import MediHouseProj from "../images/medihouse.png";
+import DjangoCert from "../images/Djano_Web_Framework_Certificate.png";
+import JSFullCert from "../images/Learn_JavaScript_FullStack_Cretificate.jpg";
+import MongoCert from "../images/UdemyMongoDb.jpg";
+import WebDesignCert from "../images/Web_Design_Course_Certificate.png";
+import AWSCert from "../images/AWS_Badge.png";
 import { FaDownload } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import { FaFacebook } from "react-icons/fa";
@@ -59,6 +68,8 @@ function Home() {
   const [msg, setMsg] = useState("");
   const [visible, setVisible] = useState(false);
   const [activeSkillFilter, setActiveSkillFilter] = useState("webDevelopment");
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [activeEducationFilter, setActiveEducationFilter] = useState("all");
 
   // Typing animation state
   const [typedText, setTypedText] = useState("");
@@ -70,6 +81,13 @@ function Home() {
     "Specialized in Information Technology",
     "Software Enginner",
     "Full Stack Developer",
+  ];
+
+  const heroStats = [
+    { value: "10+", label: "Projects Completed" },
+    { value: "5+", label: "Certificates Earned" },
+    { value: "4+", label: "Years in IT" },
+    { value: "6 Months", label: "Industry Internship" },
   ];
 
   // Typing animation effect
@@ -110,6 +128,37 @@ function Home() {
 
   const projects = [
     {
+      title: "E-Commerce System For T-Shirt Business",
+      description:
+        "TShirts E-Commerce Platform is a full-stack web app for browsing products, managing carts, and placing orders with secure JWT-based authentication.",
+      image: `${TshirtProj}`,
+      github: "https://github.com/supuntharindu123/ECommenceTShirts",
+      skills: [
+        "React.js",
+        ".NET Web API",
+        "SQL Server",
+        "Tailwind Css",
+        "AWS S3",
+      ],
+    },
+
+    {
+      title: "School Management System",
+      description:
+        "full-stack School Management System with an ASP.NET Core backend and a React + Vite frontend. It manages users, classes, subjects, exams, grades, marks, promotions, attendance, and more.",
+      image: `${SchoolProj}`,
+      github: "https://github.com/supuntharindu123/School-Management-System",
+      skills: ["React.js", ".NET Web API", "SQL Server", "Tailwind Css"],
+    },
+    {
+      title: "Doctor Appointment System",
+      description:
+        "Arogya Medi House is a full-stack doctor appointment and clinic management system built with ASP.NET Core and React.",
+      image: `${MediHouseProj}`,
+      github: "https://github.com/supuntharindu123/ArogyaMediHouse",
+      skills: ["React.js", ".NET Web API", "SQL Server", "Tailwind Css"],
+    },
+    {
       title: "Shopping Mall Management System",
       description:
         "Built a comprehensive Shopping Mall Management System to streamline operations and enhance user engagement",
@@ -125,14 +174,14 @@ function Home() {
       github: "https://github.com/supuntharindu123/AIResumeAnalyzer",
       skills: ["React", "Node.js", "MongoDB", "Express.js", "Flask", "NLP"],
     },
-    {
-      title: "Advance Task Manegement App",
-      description:
-        " Developed a full-stack Task Management System with advanced features for efficient workflow and collaboration.",
-      image: `${TaskApp}`,
-      github: "https://github.com/supuntharindu123/Task-Management-WebApp",
-      skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
-    },
+    // {
+    //   title: "Advance Task Manegement App",
+    //   description:
+    //     " Developed a full-stack Task Management System with advanced features for efficient workflow and collaboration.",
+    //   image: `${TaskApp}`,
+    //   github: "https://github.com/supuntharindu123/Task-Management-WebApp",
+    //   skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
+    // },
     {
       title: "Vehicle Advertisement System",
       description:
@@ -180,14 +229,14 @@ function Home() {
     //   github: "https://github.com/supuntharindu123/Django",
     //   skills: ["Python", "Django", "SQLite", "HTML", "CSS"],
     // },
-    {
-      title: "Task Management App",
-      description:
-        "Created a task management app with CRUD operations using Kotlin.",
-      image: `${ToDo}`,
-      github: "https://github.com/supuntharindu123/TaskmanagementApp",
-      skills: ["Kotlin", "Android", "SQLite", "XML"],
-    },
+    // {
+    //   title: "Task Management App",
+    //   description:
+    //     "Created a task management app with CRUD operations using Kotlin.",
+    //   image: `${ToDo}`,
+    //   github: "https://github.com/supuntharindu123/TaskmanagementApp",
+    //   skills: ["Kotlin", "Android", "SQLite", "XML"],
+    // },
     {
       title: "YouTube Clone",
       description: "Created YouTube Clone using YouTube Data Api and React.",
@@ -199,14 +248,15 @@ function Home() {
 
   const education = [
     {
-      institution: "Sri Lanka Institute of Information Technology (SLIIT)",
-      degree: "BSc (Hons) in Information Technology",
+      institution:
+        "Sri Lanka Institute of Information Technology (SLIIT) | Malabe",
+      degree: "BSc (Hons) in Information Technology (Specialized in IT)",
       specialization: "Information Technology",
-      period: "2022 - Present",
-      status: "Fourth Year Undergraduate",
-      gpa: "",
+      period: "Oct 2022 - Present",
+      status: "Year 4 Completed",
+      gpa: "Higher Diploma in IT - Completed",
       description:
-        "Specialized in Information Technology with focus on full-stack development, database management, and software architecture.",
+        "Successfully completed Year 4, Semester 1 without repeats. Specialized in full-stack development with expertise in ASP.NET Core, React.js, SQL Server, and cloud technologies. Strong focus on clean architecture, RESTful APIs, and secure authentication systems.",
       certificates: [],
     },
     {
@@ -219,30 +269,35 @@ function Home() {
         "Completed various online courses and earned certifications in modern web technologies and programming languages.",
       certificates: [
         {
-          name: "AWS Eduacate Indroduction To Cloud 101 - AWS",
-          link: "#",
+          name: "AWS Educate Introduction To Cloud 101 - AWS",
+          link: AWSCert,
+          image: AWSCert,
           type: "certificate",
         },
 
         {
           name: "Learn JavaScripts:Full-Stack from Scratch - Udemy",
-          link: "#",
+          link: JSFullCert,
+          image: JSFullCert,
           type: "certificate",
         },
         {
           name: "Django Web Framework - Meta",
-          link: "#",
+          link: DjangoCert,
+          image: DjangoCert,
           type: "certificate",
         },
         {
           name: "The Complete MongoDB Course - Udemy",
-          link: "#",
+          link: MongoCert,
+          image: MongoCert,
           type: "certificate",
         },
 
         {
           name: "Web Design For Beginners - CODL",
-          link: "#",
+          link: WebDesignCert,
+          image: WebDesignCert,
           type: "certificate",
         },
       ],
@@ -250,13 +305,30 @@ function Home() {
     {
       institution: "Rajapaksha Central College | Weeraketiya",
       degree: "G.C.E Advanced Level",
-      specialization: "Maths",
+      specialization: "Chemistry (B), Physics (B), Combined Mathematics (C)",
       period: "2019 - 2021",
       status: "Completed",
-      gpa: "B,B,C Passes",
+      gpa: "B, B, C Passes",
       description:
-        "Completed Advanced Level examination with Maths at Rajapaksha Central College, Weeraketiya, achieving 3 passes.",
+        "Successfully completed Advanced Level examination with strong foundation in Science and Mathematics disciplines.",
       certificates: [],
+    },
+  ];
+
+  const experience = [
+    {
+      position: "QA / Development Intern",
+      company: "ABI Systems (Pvt) Ltd",
+      period: "Aug 2025 - Feb 2026",
+      description:
+        "Contributed to software quality assurance and development in an Agile environment, leading QA activities and improving product quality.",
+      responsibilities: [
+        "Lead QA activities in Agile environment ensuring high-quality releases",
+        "Performed manual and automated testing improving defect detection efficiency",
+        "Maintained and enhanced automation scripts for mobile applications",
+        "Collaborated with developers for debugging and issue resolution",
+        "Contributed to Software Development Life Cycle (SDLC) processes",
+      ],
     },
   ];
 
@@ -272,11 +344,11 @@ function Home() {
       { name: "Socket.io", icon: Socket },
     ],
     fullStackProjects: [
+      { name: ".NET Core", icon: NET },
       { name: "Node.js", icon: Nodejs },
       { name: "Python", icon: Python },
       { name: "Django", icon: Django },
       { name: "Java", icon: Java },
-      { name: ".NET Core", icon: NET },
       { name: "Spring-Boot", icon: Spring },
     ],
     mobileAndDesktop: [
@@ -397,6 +469,28 @@ function Home() {
                   Let's Connect!
                 </a>
               </div>
+              <div className="grid grid-cols-2 gap-3 mt-8 sm:grid-cols-4 hello slide-in-up">
+                {heroStats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="relative flex flex-col items-center justify-center px-4 text-center transition-all duration-300  text-slate-900 shadow-emerald-500/10 backdrop-blur-md rounded-2xl hover:-translate-y-1 hover:scale-[1.03] hover:border-emerald-400 dark:text-white overflow-hidden"
+                    style={{ animationDelay: `${index * 0.12}s` }}
+                  >
+                    <div className="absolute top-0 left-0 w-full opacity-80 dark:opacity-100"></div>
+                    <span className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl dark:text-emerald-300">
+                      {stat.value}
+                    </span>
+                    <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-900 sm:text-xs dark:text-emerald-100/80">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* <div className="flex justify-center mt-8 mb-5 lg:justify-center slide-in-up">
+                <div className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase border rounded-full shadow-lg text-emerald-700 bg-gradient-to-r from-emerald-50 to-white border-emerald-300 shadow-emerald-500/10 backdrop-blur-md dark:bg-gradient-to-r dark:from-emerald-950/70 dark:to-black dark:text-emerald-300 dark:border-emerald-400/40 dark:shadow-emerald-500/20">
+                  Available for Opportunities
+                </div>
+              </div> */}
             </div>
             <div className="flex items-center justify-center w-full mt-8 lg:-mr-32 lg:w-1/2 lg:mt-0">
               <img
@@ -447,101 +541,222 @@ function Home() {
           >
             <div className="container mx-auto">
               <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                EDUCATION
+                EDUCATION & CERTIFICATIONS
               </h1>
+
+              {/* Education Filter Tabs */}
+              <div className="flex flex-wrap justify-center gap-2 mb-12 sm:gap-3 md:gap-4">
+                <button
+                  onClick={() => setActiveEducationFilter("all")}
+                  className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-300 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
+                    activeEducationFilter === "all"
+                      ? "bg-black dark:bg-emerald-600 text-white shadow-lg"
+                      : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600"
+                  }`}
+                >
+                  All Education
+                </button>
+                <button
+                  onClick={() => setActiveEducationFilter("university")}
+                  className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-300 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
+                    activeEducationFilter === "university"
+                      ? "bg-black dark:bg-emerald-600 text-white shadow-lg"
+                      : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600"
+                  }`}
+                >
+                  University
+                </button>
+                <button
+                  onClick={() => setActiveEducationFilter("certifications")}
+                  className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-300 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
+                    activeEducationFilter === "certifications"
+                      ? "bg-black dark:bg-emerald-600 text-white shadow-lg"
+                      : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600"
+                  }`}
+                >
+                  Certifications
+                </button>
+              </div>
 
               {/* Education List */}
               <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-                {education.map((edu, index) => (
+                {education
+                  .filter((edu) => {
+                    if (activeEducationFilter === "all") return true;
+                    if (activeEducationFilter === "university")
+                      return (
+                        edu.institution.includes("SLIIT") ||
+                        edu.institution.includes("Rajapaksha")
+                      );
+                    if (activeEducationFilter === "certifications")
+                      return edu.institution.includes("Online");
+                    return true;
+                  })
+                  .map((edu, index) => (
+                    <div
+                      key={index}
+                      className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-emerald-600 myblock transition-all duration-300 hover:shadow-lg dark:hover:shadow-emerald-900/30 ${
+                        index === 0
+                          ? "slide-in-left"
+                          : index === 1
+                            ? "slide-in-up"
+                            : "slide-in-right"
+                      }`}
+                      style={{ animationDelay: `${index * 0.2}s` }}
+                    >
+                      {/* Timeline Dot */}
+                      <div className="absolute left-[-10px] top-0">
+                        <div className="flex items-center justify-center w-4 h-4 bg-black rounded-full shadow-lg md:w-5 md:h-5 dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700">
+                          <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
+                        </div>
+                      </div>
+
+                      {/* Education Content */}
+                      <div className="ml-2 md:ml-4">
+                        {/* Institution and Period */}
+                        <div className="flex flex-col gap-2 mb-3 md:flex-row md:items-center md:justify-between">
+                          <div className="flex items-center flex-1 gap-3">
+                            <span className="px-2 py-1 text-lg font-bold rounded-full bg-emerald-500 dark:bg-emerald-600">
+                              {edu.institution.includes("Online") ? "📜" : "🎓"}
+                            </span>
+                            <h2 className="text-lg font-bold text-black md:text-xl lg:text-2xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                              {edu.institution}
+                            </h2>
+                          </div>
+                          <span className="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full md:px-3 md:text-sm dark:text-emerald-300 dark:bg-emerald-900">
+                            <FaCalendarAlt className="inline mr-1" />
+                            {edu.period}
+                          </span>
+                        </div>
+
+                        {/* Degree and Specialization */}
+                        <h3 className="mb-2 text-base font-semibold text-black md:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                          {edu.degree}
+                        </h3>
+                        {edu.specialization && (
+                          <p className="mb-3 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                            <strong>Specialization:</strong>{" "}
+                            {edu.specialization}
+                          </p>
+                        )}
+
+                        {/* Status and GPA */}
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          <span className="px-2 py-1 text-xs font-medium text-white bg-black rounded-full dark:bg-green-500 md:px-3 md:text-sm">
+                            {edu.status}
+                          </span>
+                          {edu.gpa && (
+                            <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-stone-800 dark:bg-emerald-600 md:px-3 md:text-sm">
+                              {edu.gpa}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Description */}
+                        <p className="mb-4 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                          {edu.description}
+                        </p>
+
+                        {/* Certificates */}
+                        {edu.certificates && edu.certificates.length > 0 && (
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 mb-2">
+                              <FaCertificate className="text-gray-500 dark:text-emerald-400" />
+                              <span className="text-sm font-medium text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+                                Certificates ({edu.certificates.length}):
+                              </span>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {edu.certificates.map((cert, certIndex) => (
+                                <button
+                                  key={certIndex}
+                                  onClick={() => setSelectedCertificate(cert)}
+                                  className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-black transition-all duration-200 bg-gray-100 rounded-md hover:scale-105 hover:bg-gray-200 dark:bg-gradient-to-r dark:from-emerald-700 dark:to-emerald-600 dark:text-white dark:hover:from-emerald-600 dark:hover:to-emerald-500"
+                                >
+                                  <span className="max-w-xs truncate">
+                                    {cert.name}
+                                  </span>
+                                  <FaExternalLinkAlt className="text-xs text-gray-600 dark:text-emerald-200" />
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Professional Experience Section */}
+          <div
+            className="px-4 py-16 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+            id="experience"
+          >
+            <div className="container mx-auto">
+              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
+                PROFESSIONAL EXPERIENCE
+              </h1>
+
+              {/* Experience List */}
+              <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+                {experience.map((exp, index) => (
                   <div
                     key={index}
-                    className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-gray-600 myblock ${
-                      index === 0
-                        ? "slide-in-left"
-                        : index === 1
-                        ? "slide-in-up"
-                        : "slide-in-right"
-                    }`}
+                    className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-emerald-600 myblock slide-in-left`}
                     style={{ animationDelay: `${index * 0.2}s` }}
                   >
                     {/* Timeline Dot */}
                     <div className="absolute left-[-10px] top-0">
-                      <div className="flex items-center justify-center w-4 h-4 bg-black rounded-full shadow-lg md:w-5 md:h-5 dark:bg-emerald-800">
+                      <div className="flex items-center justify-center w-4 h-4 bg-black rounded-full shadow-lg md:w-5 md:h-5 dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700">
                         <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
                       </div>
                     </div>
 
-                    {/* Education Content */}
+                    {/* Experience Content */}
                     <div className="ml-2 md:ml-4">
-                      {/* Institution and Period */}
+                      {/* Position and Company */}
                       <div className="flex flex-col gap-2 mb-3 md:flex-row md:items-center md:justify-between">
                         <h2 className="text-lg font-bold text-black md:text-xl lg:text-2xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                          {edu.institution}
+                          {exp.position}
                         </h2>
                         <span className="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full md:px-3 md:text-sm dark:text-emerald-300 dark:bg-emerald-900">
-                          <FaCalendarAlt className="inline mr-1" />
-                          {edu.period}
+                          {exp.period}
                         </span>
                       </div>
 
-                      {/* Degree and Specialization */}
+                      {/* Company Name */}
                       <h3 className="mb-2 text-base font-semibold text-black md:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                        {edu.degree}
+                        {exp.company}
                       </h3>
-                      {edu.specialization && (
-                        <p className="mb-3 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                          <strong>Specialization:</strong> {edu.specialization}
-                        </p>
-                      )}
-
-                      {/* Status and GPA */}
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <span className="px-2 py-1 text-xs font-medium text-white bg-black rounded-full dark:bg-green-500 md:px-3 md:text-sm">
-                          {edu.status}
-                        </span>
-                        {edu.gpa && (
-                          <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-stone-800 dark:bg-emerald-600 md:px-3 md:text-sm">
-                            {edu.gpa}
-                          </span>
-                        )}
-                      </div>
 
                       {/* Description */}
                       <p className="mb-4 text-sm text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                        {edu.description}
+                        {exp.description}
                       </p>
 
-                      {/* Certificates */}
-                      {edu.certificates && edu.certificates.length > 0 && (
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 mb-2">
-                            <FaCertificate className="text-gray-500" />
-                            <span className="text-sm font-medium text-black md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                              Certificates ({edu.certificates.length}):
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {edu.certificates.map((cert, certIndex) => (
-                              <a
-                                key={certIndex}
-                                href={cert.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-white transition-all duration-300 bg-black rounded-full md:px-3 md:text-sm dark:bg-gradient-to-r dark:from-emerald-700 dark:to-emerald-600 hover:from-gray-600 hover:to-emerald-700 hover:scale-105"
+                      {/* Responsibilities */}
+                      {exp.responsibilities &&
+                        exp.responsibilities.length > 0 && (
+                          <ul className="ml-4 space-y-2">
+                            {exp.responsibilities.map((resp, respIndex) => (
+                              <li
+                                key={respIndex}
+                                className="text-sm text-black list-disc md:text-base dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text"
                               >
-                                <span>{cert.name}</span>&nbsp;
-                                <FaExternalLinkAlt className="text-xs" />
-                              </a>
+                                {resp}
+                              </li>
                             ))}
-                          </div>
-                        </div>
-                      )}
+                          </ul>
+                        )}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+
           <div
             className="px-4 py-12 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
             id="projects"
@@ -694,7 +909,7 @@ function Home() {
                         </div>
                       </div>
                     );
-                  }
+                  },
                 )}
               </div>
             </div>
@@ -937,6 +1152,33 @@ function Home() {
           </div>
         </div>
         <Footer></Footer>
+
+        {/* Certificate Modal */}
+        {selectedCertificate && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+            <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-2xl dark:bg-black dark:border dark:border-emerald-700">
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCertificate(null)}
+                className="absolute p-2 text-gray-600 transition-all rounded-full top-4 right-4 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700"
+              >
+                <FaX className="text-2xl" />
+              </button>
+
+              {/* Modal Content */}
+              <div className="p-6 md:p-8">
+                <h2 className="mb-4 text-xl font-bold text-center text-black md:text-2xl dark:text-white">
+                  {selectedCertificate.name}
+                </h2>
+                <img
+                  src={selectedCertificate.image}
+                  alt={selectedCertificate.name}
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -23,7 +23,7 @@ function NavBar() {
           {/* Logo */}
           <div className="px-6 py-2 text-2xl font-black text-black font-display hover:text-zinc-600 dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-800 dark:to-emerald-200 sm:text-3xl">
             <a href="/" onClick={closeMenu}>
-              SUPUN THARINDU
+              SUPUN THARINDU KUMARASENA
             </a>
           </div>
 
@@ -36,31 +36,31 @@ function NavBar() {
               HOME
             </a>
             <a
-              href="#about"
+              href="/#about"
               className="px-4 py-2 text-lg font-black text-black transition duration-150 ease-in-out font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-700 dark:to-emerald-200 hover:scale-105 hover:text-zinc-600 xl:text-xl"
             >
               ABOUT
             </a>
             <a
-              href="#education"
+              href="/#education"
               className="px-4 py-2 text-lg font-black text-black transition duration-150 ease-in-out font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-700 dark:to-emerald-200 hover:scale-105 hover:text-zinc-600 xl:text-xl"
             >
               EDUCATION
             </a>
             <a
-              href="#projects"
+              href="/#projects"
               className="px-4 py-2 text-lg font-black text-black transition duration-150 ease-in-out font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-700 dark:to-emerald-200 hover:scale-105 hover:text-zinc-600 xl:text-xl"
             >
               PROJECTS
             </a>
             <a
-              href="#skills"
+              href="/#skills"
               className="px-4 py-2 text-lg font-black text-black transition duration-150 ease-in-out font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-700 dark:to-emerald-200 hover:scale-105 hover:text-zinc-600 xl:text-xl"
             >
               SKILLS
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               className="px-4 py-2 text-lg font-black text-black transition duration-150 ease-in-out font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-700 dark:to-emerald-200 hover:scale-105 hover:text-zinc-600 xl:text-xl"
             >
               CONTACT
@@ -135,35 +135,35 @@ function NavBar() {
               HOME
             </a>
             <a
-              href="#about"
+              href="/#about"
               onClick={closeMenu}
               className="block px-4 py-3 text-lg font-black text-black transition duration-150 ease-in-out rounded-md font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-300 dark:to-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               ABOUT
             </a>
             <a
-              href="#education"
+              href="/#education"
               onClick={closeMenu}
               className="block px-4 py-3 text-lg font-black text-black transition duration-150 ease-in-out rounded-md font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-300 dark:to-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               EDUCATION
             </a>
             <a
-              href="#projects"
+              href="/#projects"
               onClick={closeMenu}
               className="block px-4 py-3 text-lg font-black text-black transition duration-150 ease-in-out rounded-md font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-300 dark:to-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               PROJECTS
             </a>
             <a
-              href="#skills"
+              href="/#skills"
               onClick={closeMenu}
               className="block px-4 py-3 text-lg font-black text-black transition duration-150 ease-in-out rounded-md font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-300 dark:to-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               SKILLS
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               onClick={closeMenu}
               className="block px-4 py-3 text-lg font-black text-black transition duration-150 ease-in-out rounded-md font-heading dark:text-transparent dark:bg-gradient-to-br bg-clip-text dark:from-emerald-300 dark:to-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
