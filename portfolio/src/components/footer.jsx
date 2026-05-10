@@ -9,7 +9,7 @@ function Footer() {
   // Responsive footer for mobile and desktop
 
   return (
-    <footer className="px-4 py-8 text-black bg-white dark:text-white dark:from-black dark:via-slate-950 dark:to-emerald-900 sm:px-6 md:px-8 sm:py-10">
+    <footer className="px-4 py-8 text-black bg-white dark:bg-gradient-to-tr dark:text-white dark:from-black dark:via-slate-950 dark:to-emerald-900 sm:px-6 md:px-8 sm:py-10">
       <div className="container grid items-start grid-cols-1 gap-6 mx-auto md:grid-cols-3 md:gap-12 sm:gap-8">
         <div className="space-y-4">
           <h3 className="text-lg font-extrabold tracking-wider text-black dark:text-emerald-200 sm:text-2xl">
