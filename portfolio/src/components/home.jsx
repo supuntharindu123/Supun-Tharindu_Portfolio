@@ -3,12 +3,13 @@ import "../../src/App.css";
 import NavBar from "./nav";
 import Footer from "./footer";
 import { useTheme } from "../contexts/ThemeContext";
-import Me from "../images/me8.png";
+import Me from "../images/me.png";
 import HTML from "../images/html.png";
 import CSS from "../images/css.png";
 import Django from "../images/django.png";
 import Java from "../images/java.png";
 import Js from "../images/js.png";
+import Docker from "../images/docker.png";
 import Kotlin from "../images/kotlin.png";
 import MongoDb from "../images/mongodb.png";
 import Nodejs from "../images/nodejs.png";
@@ -65,8 +66,11 @@ function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState("");
   const [msg, setMsg] = useState("");
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [statusType, setStatusType] = useState("");
   const [activeSkillFilter, setActiveSkillFilter] = useState("webDevelopment");
   const [selectedCertificate, setSelectedCertificate] = useState(null);
   const [activeEducationFilter, setActiveEducationFilter] = useState("all");
@@ -84,7 +88,7 @@ function Home() {
   ];
 
   const heroStats = [
-    { value: "10+", label: "Projects Completed" },
+    { value: "20+", label: "Projects Completed" },
     { value: "5+", label: "Certificates Earned" },
     { value: "4+", label: "Years in IT" },
     { value: "6 Months", label: "Industry Internship" },
@@ -140,39 +144,6 @@ function Home() {
         "Tailwind Css",
         "AWS S3",
       ],
-    },
-
-    {
-      title: "School Management System",
-      description:
-        "full-stack School Management System with an ASP.NET Core backend and a React + Vite frontend. It manages users, classes, subjects, exams, grades, marks, promotions, attendance, and more.",
-      image: `${SchoolProj}`,
-      github: "https://github.com/supuntharindu123/School-Management-System",
-      skills: ["React.js", ".NET Web API", "SQL Server", "Tailwind Css"],
-    },
-    {
-      title: "Doctor Appointment System",
-      description:
-        "Arogya Medi House is a full-stack doctor appointment and clinic management system built with ASP.NET Core and React.",
-      image: `${MediHouseProj}`,
-      github: "https://github.com/supuntharindu123/ArogyaMediHouse",
-      skills: ["React.js", ".NET Web API", "SQL Server", "Tailwind Css"],
-    },
-    {
-      title: "Shopping Mall Management System",
-      description:
-        "Built a comprehensive Shopping Mall Management System to streamline operations and enhance user engagement",
-      image: `${MallApp}`,
-      github: "https://github.com/supuntharindu123/ITPM",
-      skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind Css"],
-    },
-    {
-      title: "Resume Analyzer",
-      description:
-        "Developed a full-stack AI-powered Resume Analysis system designed to revolutionize hiring by precisely matching resumes to job descriptions, optimizing recruitment processes, and assisting job seekers",
-      image: `${Resume}`,
-      github: "https://github.com/supuntharindu123/AIResumeAnalyzer",
-      skills: ["React", "Node.js", "MongoDB", "Express.js", "Flask", "NLP"],
     },
     // {
     //   title: "Advance Task Manegement App",
@@ -358,6 +329,7 @@ function Home() {
     ],
     developmentTools: [
       { name: "Github", icon: Github },
+      { name: "Docker", icon: Docker },
       { name: "Vscode", icon: Vscode },
       { name: "Postman", icon: Postman },
       { name: "AWS", icon: AWS },
@@ -378,6 +350,41 @@ function Home() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    // Basic client-side validation before sending
+    const nameVal = name.trim();
+    const emailVal = email.trim();
+    const messageVal = message.trim();
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (nameVal.length < 2) {
+      setMsg("Please enter your full name.");
+      setVisible(true);
+      return;
+    }
+
+    if (!emailRegex.test(emailVal)) {
+      setMsg("Please enter a valid email address.");
+      setVisible(true);
+      return;
+    }
+
+    if (messageVal.length < 10) {
+      setMsg("Message must be at least 10 characters.");
+      setVisible(true);
+      return;
+    }
+
+    // basic honeypot check
+    const botField = event.target.botcheck && event.target.botcheck.value;
+    if (botField) {
+      // silently drop spam submissions
+      return;
+    }
+
+    setStatusType("");
+
+    setLoading(true);
+
     const formData = new FormData(event.target);
 
     formData.append("access_key", "5f15c21f-5b4b-4858-91ba-ade90e882c8c");
@@ -397,13 +404,22 @@ function Home() {
     if (res.success) {
       console.log("Success", res);
       setName("");
+      setSubject("");
       setEmail("");
       setMessage("");
-      setMsg("Your Message Sending Success!");
+      setMsg("Your message was sent successfully.");
+      setStatusType("success");
+      setVisible(true);
+      // focus name for next input
+      const nameEl = document.getElementById("name");
+      if (nameEl) nameEl.focus();
     } else {
       console.error("Error", res);
-      setMsg("Failed to Send Your Message!");
+      setMsg("Failed to send your message. Please try again later.");
+      setStatusType("error");
+      setVisible(true);
     }
+    setLoading(false);
   };
 
   return (
@@ -412,64 +428,71 @@ function Home() {
         <NavBar></NavBar>
 
         <div className="">
-          <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-200 lg:flex-row lg:px-8 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-900 ">
-            <div className="flex flex-col justify-center w-full max-w-2xl lg:w-1/2 lg:pr-8 lg:-mr-12">
-              <h1 className="text-4xl font-black text-center text-transparent font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-950 hello bounce-in md:text-6xl lg:text-7xl xl:text-8xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700 animate-bounce">
-                WELCOME !
+          <div className="flex flex-col items-center justify-center w-full min-h-screen px-4 bg-gray-200 lg:flex-row lg:px-2 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-900 ">
+            <div className="flex items-center justify-center w-full lg:w-1/3 xl:-mt-28">
+              <img
+                src={Me}
+                className="w-64 h-80 sm:w-80 sm:h-96 md:w-96 md:h-[480px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[650px] brightness-95 contrast-125 transition-transform duration-300 object-cover"
+                alt="Supun Tharindu"
+              />
+            </div>
+            <div className="flex flex-col justify-center w-full max-w-2xl px-2 mt-6 lg:mt-4 lg:w-1/2 lg:pr-8 sm:px-0 ">
+              <h1 className="text-4xl font-black tracking-wide text-center text-transparent font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-950 hello md:text-6xl lg:text-7xl xl:text-8xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-700">
+                Welcome
               </h1>
-              <h2 className="my-4 text-2xl font-bold text-center text-black transition-colors duration-300 font-heading hello slide-in-left bg-clip-text sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-600 dark:to-slate-400">
+              <h2 className="my-3 text-lg font-semibold text-center text-black transition-colors duration-300 font-heading hello sm:my-4 sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl dark:text-white">
                 I'm Supun Tharindu Kumarasena
               </h2>
-              <h3 className="text-base font-medium text-center transition-colors duration-300 font-body sm:text-lg md:text-xl lg:text-2xl xl:text-3xl hello typing-container slide-in-right">
-                <span className="text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
+              <h3 className="text-sm font-medium tracking-wide text-center transition-colors duration-300 font-body sm:text-base md:text-lg lg:text-2xl xl:text-3xl hello typing-container">
+                <span className="text-emerald-700 dark:text-emerald-400">
                   {typedText}
                 </span>
               </h3>
-              <div className="flex flex-wrap justify-center gap-3 mt-8 hello slide-in-up">
+              <div className="flex flex-wrap justify-center gap-3 mt-8 hello">
                 <a
                   href="https://github.com/supuntharindu123"
-                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl text-gray-700 transition-all duration-200 border border-gray-400 rounded-full sm:p-3 sm:text-2xl dark:border-gray-500 dark:text-gray-300 hover:border-emerald-600 hover:text-emerald-700 dark:hover:border-emerald-400 dark:hover:text-emerald-400"
                 >
-                  <FaGithub className="hover:animate-bounce"></FaGithub>
+                  <FaGithub></FaGithub>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/supun-tharindu/"
-                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl text-gray-700 transition-all duration-200 border border-gray-400 rounded-full sm:p-3 sm:text-2xl dark:border-gray-500 dark:text-gray-300 hover:border-emerald-600 hover:text-emerald-700 dark:hover:border-emerald-400 dark:hover:text-emerald-400"
                 >
-                  <CiLinkedin className="hover:animate-bounce"></CiLinkedin>
+                  <CiLinkedin></CiLinkedin>
                 </a>
                 <a
                   href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
-                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl text-gray-700 transition-all duration-200 border border-gray-400 rounded-full sm:p-3 sm:text-2xl dark:border-gray-500 dark:text-gray-300 hover:border-emerald-600 hover:text-emerald-700 dark:hover:border-emerald-400 dark:hover:text-emerald-400"
                 >
-                  <FaFacebook className="hover:animate-bounce"></FaFacebook>
+                  <FaFacebook></FaFacebook>
                 </a>
                 <a
                   href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr "
-                  className="p-2 text-xl transition-all duration-300 border border-black rounded-full sm:p-3 sm:text-2xl dark:border-emerald-300 dark:text-emerald-300 hover:bg-slate-700 hover:text-white rotate-hover glow-hover"
+                  className="p-2 text-xl text-gray-700 transition-all duration-200 border border-gray-400 rounded-full sm:p-3 sm:text-2xl dark:border-gray-500 dark:text-gray-300 hover:border-emerald-600 hover:text-emerald-700 dark:hover:border-emerald-400 dark:hover:text-emerald-400"
                 >
-                  <FaInstagramSquare className="hover:animate-bounce"></FaInstagramSquare>
+                  <FaInstagramSquare></FaInstagramSquare>
                 </a>
               </div>
               <div className="flex flex-col items-center w-full gap-3 mt-8 sm:flex-row sm:justify-center">
                 <a
                   href={myCv}
                   download={myCv}
-                  className="w-full px-6 py-3 text-base font-semibold text-white transition-all duration-300 border-2 border-gray-500 rounded-full shadow bg-slate-900 hello sm:w-auto sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:hover:text-black hover:bg-white hover:text-black dark:hover:bg-emerald-300"
+                  className="w-full px-6 py-3 text-base font-semibold text-white transition-all duration-200 bg-gray-900 border border-gray-800 rounded-md shadow-sm hello sm:w-auto sm:px-8 sm:text-lg dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700"
                 >
                   <span className="flex items-center justify-center gap-2">
                     Download CV
-                    <FaDownload className="text-sm sm:text-base hover:animate-bounce wiggle" />
+                    <FaDownload className="text-sm sm:text-base" />
                   </span>
                 </a>{" "}
                 <a
                   href="#contact"
-                  className="w-full px-6 py-3 text-base font-semibold text-center text-black transition-all duration-300 border-2 border-gray-500 rounded-full shadow hover:bg-stone-900 bg-slate-100 hello sm:w-auto sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:bg-slate-800 dark:hover:bg-emerald-300 dark:hover:text-black hover:text-white"
+                  className="w-full px-4 py-2.5 text-sm font-semibold text-center text-white transition-all duration-200 border border-emerald-700 rounded-md shadow-sm bg-emerald-700 hello sm:w-auto sm:px-6 sm:py-3 sm:text-base md:px-8 md:text-lg dark:border-emerald-500 dark:bg-emerald-700 hover:bg-emerald-800 dark:hover:bg-emerald-600 active:scale-95"
                 >
-                  Let's Connect!
+                  Contact Me
                 </a>
               </div>
-              <div className="grid grid-cols-2 gap-3 mt-8 sm:grid-cols-4 hello slide-in-up">
+              <div className="grid grid-cols-2 gap-3 mt-8 sm:grid-cols-4 hello">
                 {heroStats.map((stat, index) => (
                   <div
                     key={index}
@@ -492,45 +515,36 @@ function Home() {
                 </div>
               </div> */}
             </div>
-            <div className="flex items-center justify-center w-full mt-8 lg:-mr-32 lg:w-1/2 lg:mt-0">
-              <img
-                src={Me}
-                className="w-64 h-80 sm:w-80 sm:h-96 md:w-96 md:h-[480px] lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[750px] brightness-95 contrast-125 transition-transform duration-300 object-cover"
-                alt="Supun Tharindu"
-              />
-            </div>
           </div>
           <div
             className="flex-col items-center justify-center px-4 py-10 bg-white lg:px-8 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800 "
             id="about"
           >
             <div className="w-full mb-8 lg:mb-0 lg:pr-8">
-              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                ABOUT ME
+              <h1 className="mb-12 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
+                About Me
               </h1>
             </div>
             <div className="flex flex-col items-center justify-center w-3/4 m-auto ">
-              <p className="p-4 mb-8 text-base font-semibold transition-transform duration-300 bg-gray-100 border shadow select-none font-body sm:p-6 md:p-8 sm:text-lg md:text-xl rounded-xl text-slate-800 dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-500 dark:to-slate-300 bg-clip-text dark:bg-black zoom-in hover:scale-105">
-                Hi, I’m Supun Tharindu — a dedicated fourth-year undergraduate
-                at SLIIT, specializing in Information Technology. I’m passionate
-                about full-stack development and skilled in modern technologies
-                like React.js, Node.js, Django, and Spring Boot.
-                <br /> Currently, I’m expanding my expertise in AWS cloud
-                services and .NET development to become a more versatile
-                software engineer.
-                <br /> I enjoy solving real-world problems, continuously
-                learning, and building meaningful, user-focused applications.
-                I’m actively seeking an <b>internship opportunity</b> to grow my
-                experience and contribute to a dynamic development team.
+              <p className="p-4 mb-8 text-base font-medium leading-7 text-gray-800 transition-all duration-300 border border-gray-200 shadow-sm select-none bg-gray-50 font-body sm:p-6 md:p-8 sm:text-lg md:text-xl rounded-xl dark:text-gray-100 dark:bg-gray-900 dark:border-gray-800">
+                I am a Full Stack Developer and undergraduate at Sri Lanka
+                Institute of Information Technology, specializing in modern web
+                application development. I work with React.js, ASP.NET Core Web
+                API, Node.js, SQL Server, MongoDB, and Redux Toolkit to build
+                secure, scalable, and user-focused applications.
                 <br />
-                Thank you!
+                <br /> My experience includes e-commerce systems, healthcare
+                platforms, school management solutions, and AI-based projects. I
+                also completed a QA / Development internship at ABI Systems,
+                which strengthened my skills in software development, testing,
+                debugging, and teamwork.
               </p>
               <div className="flex justify-end w-full">
                 <a
                   href="#contact"
-                  className="px-6 py-3 text-base font-semibold text-white transition-all duration-300 border-2 border-gray-500 rounded-full shadow bg-slate-900 hello sm:px-8 sm:text-lg dark:border-emerald-300 dark:text-emerald-300 dark:hover:text-black hover:bg-white hover:text-black dark:hover:bg-emerald-300"
+                  className="px-6 py-3 text-base font-semibold text-white transition-all duration-200 border rounded-md shadow-sm border-emerald-700 bg-emerald-700 hello sm:px-8 sm:text-lg dark:border-emerald-500 dark:bg-emerald-700 hover:bg-emerald-800 dark:hover:bg-emerald-600"
                 >
-                  Let's Connect!
+                  Get In Touch
                 </a>
               </div>
             </div>
@@ -540,8 +554,8 @@ function Home() {
             id="education"
           >
             <div className="container mx-auto">
-              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                EDUCATION & CERTIFICATIONS
+              <h1 className="mb-12 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
+                Education & Certifications
               </h1>
 
               {/* Education Filter Tabs */}
@@ -595,14 +609,7 @@ function Home() {
                   .map((edu, index) => (
                     <div
                       key={index}
-                      className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-emerald-600 myblock transition-all duration-300 hover:shadow-lg dark:hover:shadow-emerald-900/30 ${
-                        index === 0
-                          ? "slide-in-left"
-                          : index === 1
-                            ? "slide-in-up"
-                            : "slide-in-right"
-                      }`}
-                      style={{ animationDelay: `${index * 0.2}s` }}
+                      className="relative pb-6 pl-6 transition-all duration-300 border-l-4 border-gray-300 md:pl-8 md:pb-8 dark:border-emerald-600 myblock hover:shadow-lg dark:hover:shadow-emerald-900/30"
                     >
                       {/* Timeline Dot */}
                       <div className="absolute left-[-10px] top-0">
@@ -695,8 +702,8 @@ function Home() {
             id="experience"
           >
             <div className="container mx-auto">
-              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                PROFESSIONAL EXPERIENCE
+              <h1 className="mb-12 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
+                Professional Experience
               </h1>
 
               {/* Experience List */}
@@ -704,8 +711,7 @@ function Home() {
                 {experience.map((exp, index) => (
                   <div
                     key={index}
-                    className={`relative pl-6 md:pl-8 pb-6 md:pb-8 border-l-4 border-gray-300 dark:border-emerald-600 myblock slide-in-left`}
-                    style={{ animationDelay: `${index * 0.2}s` }}
+                    className="relative pb-6 pl-6 border-l-4 border-gray-300 md:pl-8 md:pb-8 dark:border-emerald-600 myblock"
                   >
                     {/* Timeline Dot */}
                     <div className="absolute left-[-10px] top-0">
@@ -758,39 +764,39 @@ function Home() {
           </div>
 
           <div
-            className="px-4 py-12 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-3 py-8 bg-white sm:px-4 sm:py-12 lg:px-8 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
             id="projects"
           >
-            <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-              MY PROJECTS
+            <h1 className="mb-8 text-2xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:mb-12 sm:text-3xl md:text-4xl lg:text-6xl dark:text-emerald-400">
+              Projects
             </h1>
             <div className="container mx-auto">
-              <div className="flex gap-4 pb-6 overflow-x-auto md:gap-6 lg:gap-8 projects-scroll snap-x snap-mandatory">
+              <div className="flex gap-3 pb-6 overflow-x-auto sm:gap-4 md:gap-6 lg:gap-8 projects-scroll snap-x snap-mandatory">
                 {projects.map((project, index) => (
                   <div
                     key={index}
-                    className="flex flex-col flex-shrink-0 transition-shadow duration-300 bg-gray-300 border-4 rounded-lg shadow-lg dark:border-emerald-950 dark:hover:border-emerald-800 w-72 sm:w-80 md:w-96 myblock dark:bg-black hover:shadow-none hover:border-neutral-600 zoom-in snap-center"
+                    className="flex flex-col flex-shrink-0 w-64 transition-all duration-300 bg-gray-300 border-2 rounded-lg shadow-md dark:border-emerald-900 dark:hover:border-emerald-700 sm:w-72 md:w-80 lg:w-96 myblock dark:bg-black hover:shadow-lg hover:border-gray-400 snap-center"
                   >
                     <img
                       src={project.image}
-                      className="object-cover w-full transition-transform duration-300 rounded-t-lg h-44 sm:h-48 md:h-52 hover:scale-110"
+                      className="object-cover w-full h-40 transition-transform duration-300 rounded-t-lg sm:h-44 md:h-48 hover:scale-105"
                       alt={project.title}
                     />
-                    <div className="flex flex-col justify-between h-full p-4 md:p-6">
+                    <div className="flex flex-col justify-between h-full p-3 sm:p-4 md:p-5 lg:p-6">
                       <div>
-                        <h2 className="text-lg font-black text-center font-heading dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text slide-in-up sm:text-xl md:text-2xl">
+                        <h2 className="text-base font-bold text-center text-gray-900 font-heading dark:text-emerald-100 sm:text-lg md:text-xl">
                           {project.title}
                         </h2>
-                        <p className="mt-3 mb-4 text-sm font-medium text-center font-body dark:text-emerald-200 fade-in-stagger sm:text-base md:text-lg">
+                        <p className="mt-2 mb-3 text-xs font-normal leading-6 text-center text-gray-700 font-body dark:text-gray-300 sm:text-sm sm:mt-3 sm:mb-4 md:text-base">
                           {project.description}
                         </p>
 
                         {/* Skills Tags */}
-                        <div className="flex flex-wrap justify-center gap-2 mb-4">
+                        <div className="flex flex-wrap justify-center gap-1.5 mb-3 sm:gap-2 sm:mb-4">
                           {project.skills.map((skill, skillIndex) => (
                             <span
                               key={skillIndex}
-                              className="px-2 py-1 text-xs font-semibold text-white bg-black rounded-full dark:bg-emerald-400 dark:text-gray-700 sm:text-sm"
+                              className="px-1.5 py-0.5 text-[10px] font-semibold text-white bg-gray-800 rounded-full dark:bg-emerald-600 dark:text-white sm:px-2 sm:py-1 sm:text-xs md:text-sm"
                             >
                               {skill}
                             </span>
@@ -802,10 +808,10 @@ function Home() {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center w-full py-2 text-sm font-bold text-center transition-colors duration-300 bg-white border rounded-lg shadow-md dark:bg-emerald-700 sm:text-base hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black"
+                          className="flex items-center justify-center w-full py-1.5 text-xs font-semibold text-center transition-colors duration-200 bg-white border border-gray-300 rounded-md shadow-sm text-gray-900 dark:bg-emerald-700 dark:border-emerald-700 dark:text-white sm:py-2 sm:text-sm md:text-base hover:bg-gray-100 dark:hover:bg-emerald-600 active:scale-95"
                         >
                           GitHub{" "}
-                          <FaGithub className="ml-2 text-lg sm:text-xl rotate-hover" />
+                          <FaGithub className="ml-2 text-lg sm:text-xl" />
                         </a>
                       </div>
                     </div>
@@ -815,7 +821,7 @@ function Home() {
 
               {/* Scroll Indicator */}
               <div className="flex justify-center mt-4">
-                <p className="text-xs text-gray-600 sm:text-sm dark:text-gray-400 animate-pulse">
+                <p className="text-[10px] text-gray-600 sm:text-xs md:text-sm dark:text-gray-400">
                   ← Scroll horizontally to see more projects →
                 </p>
               </div>
@@ -823,11 +829,11 @@ function Home() {
           </div>
           <div
             id="skills"
-            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-3 py-10 bg-gray-200 sm:px-4 sm:py-12 lg:py-16 lg:px-8 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
           >
             <div className="container mx-auto">
-              <h1 className="mb-16 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                MY SKILLS
+              <h1 className="mb-12 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
+                Skills
               </h1>
 
               {/* Filter Buttons */}
@@ -836,10 +842,10 @@ function Home() {
                   <button
                     key={key}
                     onClick={() => setActiveSkillFilter(key)}
-                    className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-300 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
+                    className={`px-3 py-2 text-xs font-semibold rounded-full transition-all duration-200 border-2 hover:scale-105 sm:px-4 sm:py-3 sm:text-sm md:px-6 ${
                       activeSkillFilter === key
-                        ? "bg-black dark:bg-emerald-600 text-white  shadow-lg"
-                        : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 "
+                        ? "bg-emerald-700 dark:bg-emerald-600 text-white shadow-md border-emerald-700 dark:border-emerald-500"
+                        : "bg-white dark:bg-slate-700 text-gray-700 dark:text-white border-gray-300 dark:border-slate-600 hover:bg-emerald-50 dark:hover:bg-slate-600 "
                     }`}
                   >
                     {label}
@@ -854,22 +860,22 @@ function Home() {
                       webDevelopment: {
                         title: "Frontend Technologies",
                         color: "text-blue-600 dark:text-blue-400",
-                        animation: "slide-in-left",
+                        animation: "",
                       },
                       fullStackProjects: {
                         title: "Backend Technologies",
                         color: "text-green-600 dark:text-green-400",
-                        animation: "slide-in-up",
+                        animation: "",
                       },
                       mobileAndDesktop: {
                         title: "Databases Technologies",
                         color: "text-purple-600 dark:text-purple-400",
-                        animation: "slide-in-right",
+                        animation: "",
                       },
                       developmentTools: {
                         title: "Development Tools",
                         color: "text-orange-600 dark:text-orange-400",
-                        animation: "slide-in-left",
+                        animation: "",
                       },
                     };
 
@@ -880,9 +886,9 @@ function Home() {
                         key={categoryKey}
                         className={`myblock ${config.animation} w-full max-w-4xl `}
                       >
-                        <div className="p-4 transition-shadow duration-300 bg-white shadow-xl sm:p-6 md:p-8 dark:bg-black rounded-xl hover:shadow-2xl">
+                        <div className="p-4 transition-shadow duration-300 bg-white shadow-lg sm:p-6 md:p-8 dark:bg-black rounded-xl hover:shadow-xl">
                           <h2
-                            className={`mb-6 text-xl font-bold text-center sm:text-2xl md:text-3xl text-black dark:text-emerald-100 bounce-in`}
+                            className={`mb-6 text-xl font-bold text-center sm:text-2xl md:text-3xl text-emerald-900 dark:text-emerald-100`}
                           >
                             {config.title}
                           </h2>
@@ -890,7 +896,7 @@ function Home() {
                             {skills.map((skill, index) => (
                               <div
                                 key={index}
-                                className="flex flex-col items-center p-3 transition-transform duration-300 rounded-lg sm:p-4 bg-gray-50 dark:bg-slate-600 hover:scale-105 group zoom-in"
+                                className="flex flex-col items-center p-3 transition-transform duration-300 rounded-lg sm:p-4 bg-gray-50 dark:bg-slate-600 hover:scale-105 group"
                                 style={{
                                   animationDelay: `${index * 0.1}s`,
                                 }}
@@ -922,30 +928,30 @@ function Home() {
           >
             <div className="flex flex-row mb-16">
               <div className="container mx-auto text-center">
-                <h1 className="mb-4 text-3xl font-black text-center text-transparent transition-colors duration-300 font-display bg-clip-text bg-gradient-to-r from-emerald-950 to-stone-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-700 dark:to-emerald-500 bounce-in">
-                  CONTACT ME
+                <h1 className="mb-4 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
+                  Contact Me
                 </h1>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center lg:flex-row ">
               <div className="w-full mb-8 lg:w-1/2 lg:mb-0 lg:pr-8">
                 <div className="flex flex-col items-center justify-center">
-                  <p className="max-w-md text-lg text-center text-black font-body sm:text-xl dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text fade-in-stagger lg:text-left">
-                    Let's collaborate and bring your ideas to life! Reach out
-                    for opportunities, projects, or just to say hello.
+                  <p className="max-w-md text-lg leading-8 text-center text-gray-800 font-body sm:text-xl dark:text-gray-100 lg:text-left">
+                    Let’s discuss opportunities, projects, or ideas. I’m open to
+                    collaborations and professional inquiries.
                   </p>
 
                   <div className="mt-6 space-y-3 lg:space-y-4">
                     <div className="flex items-center justify-center gap-3 lg:justify-start">
                       <div className="w-2 h-2 bg-black rounded-full dark:bg-emerald-500"></div>
-                      <span className="text-base text-black sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                        Available for internships & freelance projects
+                      <span className="text-base text-black sm:text-lg dark:text-gray-200">
+                        Open to internships and freelance opportunities
                       </span>
                     </div>
                     <div className="flex items-center justify-center gap-3 lg:justify-start">
                       <div className="w-2 h-2 bg-black rounded-full dark:bg-emerald-500"></div>
-                      <span className="text-base text-black sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text">
-                        Quick response within 24 hours
+                      <span className="text-base text-black sm:text-lg dark:text-gray-200">
+                        Typical response within 24 hours
                       </span>
                     </div>
                   </div>
@@ -965,48 +971,45 @@ function Home() {
                       <FaEnvelope className="text-lg text-black dark:text-emerald-500" />
                       <a
                         href="mailto:supuntharindu1125@gmail.com"
-                        className="text-base text-black transition-all duration-300 sm:text-lg dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text hover:underline"
+                        className="text-base text-black transition-all duration-300 sm:text-lg dark:text-gray-200 hover:underline"
                       >
                         supuntharindu1125@gmail.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex justify-center gap-6 mt-10 lg:justify-start slide-in-up sm:gap-8">
+                  <div className="flex justify-center gap-6 mt-10 lg:justify-start sm:gap-8">
                     <a
                       href="https://www.facebook.com/share/1EsxvWXBEj/?mibextid=wwXIfr "
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-500 hover:border-blue-500 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
+                      className="p-3 text-black transition-all duration-200 border-2 border-gray-300 rounded-full shadow-sm dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-500 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30"
                     >
-                      <FaFacebook className="text-2xl heartbeat"></FaFacebook>
+                      <FaFacebook className="text-2xl"></FaFacebook>
                     </a>
                     <a
                       href="https://www.linkedin.com/in/supun-tharindu/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-700 hover:border-blue-700 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
-                      style={{ animationDelay: "0.2s" }}
+                      className="p-3 text-black transition-all duration-200 border-2 border-gray-300 rounded-full shadow-sm dark:border-emerald-300 dark:text-emerald-300 hover:text-blue-700 hover:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30"
                     >
-                      <CiLinkedin className="text-2xl heartbeat"></CiLinkedin>
+                      <CiLinkedin className="text-2xl"></CiLinkedin>
                     </a>
                     <a
                       href="https://github.com/supuntharindu123"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-gray-800 hover:border-gray-800 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
-                      style={{ animationDelay: "0.4s" }}
+                      className="p-3 text-black transition-all duration-200 border-2 border-gray-300 rounded-full shadow-sm dark:border-emerald-300 dark:text-emerald-300 hover:text-gray-800 hover:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800"
                     >
-                      <FaGithub className="text-2xl heartbeat"></FaGithub>
+                      <FaGithub className="text-2xl"></FaGithub>
                     </a>
                     <a
-                      href="ttps://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr"
+                      href="https://www.instagram.com/supun__tharindu?igsh=ajhzaGhlMDVrc2Zx&utm_source=qr"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 text-black transition-all duration-300 border-2 border-gray-300 rounded-full shadow-lg dark:border-emerald-300 dark:text-emerald-300 hover:text-gray-800 hover:border-gray-800 hover:scale-110 hover:shadow-xl rotate-hover glow-hover float"
-                      style={{ animationDelay: "0.4s" }}
+                      className="p-3 text-black transition-all duration-200 border-2 border-gray-300 rounded-full shadow-sm dark:border-emerald-300 dark:text-emerald-300 hover:text-pink-600 hover:border-pink-600 hover:bg-pink-50 dark:hover:bg-pink-900/30"
                     >
-                      <FaInstagramSquare className="text-2xl heartbeat"></FaInstagramSquare>
+                      <FaInstagramSquare className="text-2xl"></FaInstagramSquare>
                     </a>
                   </div>
                 </div>
@@ -1016,20 +1019,26 @@ function Home() {
                   <div className="absolute inset-0 rounded-xl blur opacity-20"></div>
                   <form
                     onSubmit={onSubmit}
+                    role="form"
+                    aria-label="Contact form"
                     className="relative p-6 bg-gray-300 border-2 border-gray-400 shadow-2xl sm:p-8 dark:bg-black dark:border-emerald-300 rounded-xl"
                   >
                     {visible && msg && (
-                      <div className="w-full px-6 py-4 mb-6 text-lg font-bold text-center transition-all duration-300 rounded-lg sm:text-xl ">
+                      <div
+                        className="w-full px-6 py-4 mb-6 text-lg font-bold text-center transition-all duration-300 rounded-lg sm:text-xl "
+                        role="status"
+                        aria-live="polite"
+                      >
                         <div
                           className={`flex items-center justify-center gap-3 ${
-                            msg.includes("Success")
-                              ? "text-emerald-700 bg-emerald-100 border-2 border-emerald-300 dark:text-emerald-300 dark:bg-emerald-900 dark:border-emerald-600"
-                              : "text-red-700 bg-red-100 border-2 border-red-300 dark:text-red-300 dark:bg-red-900 dark:border-red-600"
+                            statusType === "success"
+                              ? "text-emerald-900 bg-emerald-100 border-2 border-emerald-300 dark:text-white dark:bg-emerald-700 dark:border-emerald-600"
+                              : "text-red-900 bg-red-100 border-2 border-red-300 dark:text-white dark:bg-red-700 dark:border-red-600"
                           } rounded-lg p-4`}
                         >
-                          {msg.includes("Success") ? (
+                          {statusType === "success" ? (
                             <svg
-                              className="w-6 h-6"
+                              className="w-6 h-6 text-emerald-700"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -1043,7 +1052,7 @@ function Home() {
                             </svg>
                           ) : (
                             <svg
-                              className="w-6 h-6"
+                              className="w-6 h-6 text-red-700"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -1056,7 +1065,7 @@ function Home() {
                               />
                             </svg>
                           )}
-                          {msg}
+                          <span className="ml-2">{msg}</span>
                         </div>
                       </div>
                     )}
@@ -1072,16 +1081,18 @@ function Home() {
                       </label>
                       <br></br>
                       <input
+                        id="name"
                         type="text"
                         name="name"
                         value={name}
+                        aria-required="true"
                         onChange={(e) => {
                           setName(e.target.value);
                         }}
                         required
                         placeholder="Enter Your Full Name"
                         className="w-full h-10 pl-4 mt-2 transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md sm:text-lg dark:bg-emerald-950 dark:border-emerald-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
-                      ></input>
+                      />
                     </div>
                     <div
                       className="mb-3 sm:mb-8 fade-in-stagger"
@@ -1098,16 +1109,39 @@ function Home() {
                       </label>
                       <br></br>
                       <input
+                        id="email"
                         type="email"
                         name="email"
                         value={email}
+                        aria-required="true"
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
                         required
                         placeholder="Enter Your Email Address"
                         className="w-full h-10 pl-4 mt-4 text-sm transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md sm:text-lg dark:bg-emerald-950 dark:border-emerald-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
-                      ></input>
+                      />
+                    </div>
+                    <div
+                      className="mb-3 fade-in-stagger"
+                      style={{ animationDelay: "0.15s" }}
+                    >
+                      <label
+                        className="text-lg font-bold text-black dark:text-transparent dark:bg-gradient-to-br dark:from-emerald-400 dark:to-slate-400 bg-clip-text"
+                        htmlFor="subject"
+                      >
+                        Subject&nbsp;
+                      </label>
+                      <br />
+                      <input
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="Brief subject (optional)"
+                        className="w-full h-10 pl-4 mt-2 transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md sm:text-lg dark:bg-emerald-950 dark:border-emerald-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
+                      />
                     </div>
                     <div
                       className="mb-3 fade-in-stagger"
@@ -1122,28 +1156,60 @@ function Home() {
                           *
                         </span>
                       </label>
-                      <br></br>
+                      <br />
                       <textarea
+                        id="message"
                         name="message"
                         rows={5}
                         value={message}
-                        onChange={(e) => {
-                          setMessage(e.target.value);
-                        }}
+                        aria-required="true"
+                        onChange={(e) => setMessage(e.target.value)}
                         required
                         placeholder="Tell me about your project, ideas, or just say hello..."
                         className="w-full p-4 mt-4 text-lg transition-all duration-300 bg-white border-2 border-gray-300 rounded-lg shadow-md resize-none dark:border-emerald-900 dark:bg-emerald-950 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-700 dark:hover:border-emerald-400"
-                      ></textarea>
-                    </div>
-                    <div className="flex justify-end mt-8">
-                      <button
-                        type="submit"
-                        className="px-8 py-2 text-lg font-bold text-white transition-all duration-300 bg-black border-2 rounded-lg shadow-lg dark:border-emerald-500 dark:bg-gradient-to-r dark:text-black dark:from-emerald-800 dark:to-emerald-700 dark:hover:from-emerald-600 dark:hover:to-emerald-700 hover:scale-105 hover:shadow-xl sm:px-12 sm:text-xl md:text-xl focus:ring-4 focus:ring-emerald-200 dark:focus:ring-emerald-700 "
-                      >
-                        <span className="flex items-center justify-center gap-3">
-                          Send
-                        </span>
-                      </button>
+                      />
+                      <input
+                        type="text"
+                        name="botcheck"
+                        tabIndex="-1"
+                        autoComplete="off"
+                        style={{ display: "none" }}
+                      />
+                      <div className="mt-4">
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          aria-disabled={loading}
+                          className={`px-8 py-2 text-lg font-bold text-white transition-all duration-300 bg-black border-2 rounded-lg shadow-lg dark:border-emerald-500 dark:bg-gradient-to-r dark:text-black dark:from-emerald-800 dark:to-emerald-700 dark:hover:from-emerald-600 dark:hover:to-emerald-700 hover:scale-105 hover:shadow-xl sm:px-12 sm:text-xl md:text-xl focus:ring-4 focus:ring-emerald-200 dark:focus:ring-emerald-700 ${loading ? "opacity-70 cursor-wait" : ""}`}
+                        >
+                          <span className="flex items-center justify-center gap-3">
+                            {loading ? (
+                              <svg
+                                className="w-5 h-5 animate-spin"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                              >
+                                <circle
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                  strokeOpacity="0.25"
+                                ></circle>
+                                <path
+                                  d="M22 12a10 10 0 00-10-10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                  strokeLinecap="round"
+                                ></path>
+                              </svg>
+                            ) : (
+                              "Send"
+                            )}
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </form>
                 </div>
