@@ -517,7 +517,7 @@ function Home() {
             </div>
           </div>
           <div
-            className="flex-col items-center justify-center px-4 py-10 bg-white lg:px-8 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800 "
+            className="px-4 py-16 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
             id="about"
           >
             <div className="w-full mb-8 lg:mb-0 lg:pr-8">
@@ -550,7 +550,7 @@ function Home() {
             </div>
           </div>
           <div
-            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-4 py-16 bg-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
             id="education"
           >
             <div className="container mx-auto">
@@ -698,7 +698,7 @@ function Home() {
 
           {/* Professional Experience Section */}
           <div
-            className="px-4 py-16 bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
             id="experience"
           >
             <div className="container mx-auto">
@@ -829,7 +829,7 @@ function Home() {
           </div>
           <div
             id="skills"
-            className="px-3 py-10 bg-gray-200 sm:px-4 sm:py-12 lg:py-16 lg:px-8 dark:bg-gradient-to-tr dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-4 py-16 bg-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
           >
             <div className="container mx-auto">
               <h1 className="mb-12 text-3xl font-bold text-center transition-colors duration-300 text-emerald-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-emerald-400">
@@ -924,7 +924,7 @@ function Home() {
           {/* Contact Content Section */}
           <div
             id="contact"
-            className="flex flex-col px-4 py-16 bg-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
+            className="px-4 py-16 bg-gray-200 dark:bg-gradient-to-br dark:from-gray-800 dark:via-black dark:to-gray-800"
           >
             <div className="flex flex-row mb-16">
               <div className="container mx-auto text-center">
