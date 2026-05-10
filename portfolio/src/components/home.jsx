@@ -40,6 +40,7 @@ import Resume from "../images/Resume.png";
 import TaskApp from "../images/TaskApp.png";
 import SchoolProj from "../images/schoolmanagement.png";
 import TshirtProj from "../images/TshirtProj.png";
+import OnlineClass from "../images/onlineclass.jpg";
 import MediHouseProj from "../images/medihouse.png";
 import DjangoCert from "../images/Djano_Web_Framework_Certificate.png";
 import JSFullCert from "../images/Learn_JavaScript_FullStack_Cretificate.jpg";
@@ -134,86 +135,148 @@ function Home() {
     {
       title: "E-Commerce System For T-Shirt Business",
       description:
-        "TShirts E-Commerce Platform is a full-stack web app for browsing products, managing carts, and placing orders with secure JWT-based authentication.",
+        "Full-stack e-commerce web application for selling T-shirts with secure authentication, role-based access, product management with variants, cart & order workflow, and admin dashboard integration with AWS S3.",
       image: `${TshirtProj}`,
       github: "https://github.com/supuntharindu123/ECommenceTShirts",
       skills: [
         "React.js",
-        ".NET Web API",
+        "ASP.NET Core",
         "SQL Server",
-        "Tailwind Css",
+        "JWT",
         "AWS S3",
+        "Google OAuth",
       ],
     },
-    // {
-    //   title: "Advance Task Manegement App",
-    //   description:
-    //     " Developed a full-stack Task Management System with advanced features for efficient workflow and collaboration.",
-    //   image: `${TaskApp}`,
-    //   github: "https://github.com/supuntharindu123/Task-Management-WebApp",
-    //   skills: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
-    // },
+    {
+      title: "Arogya Medi House - Doctor Appointment System",
+      description:
+        "Full-stack doctor appointment system with secure backend and role-based access for SuperAdmin, doctor, patient, and receptionist. Features department management, doctor availability, leave handling, payment confirmation, and action logging.",
+      image: `${MediHouseProj}`,
+      github: "https://github.com/supuntharindu123/ArogyaMediHouse",
+      skills: [
+        "React.js",
+        "ASP.NET Core",
+        "SQL Server",
+        "JWT",
+        "Role-Based Authorization",
+      ],
+    },
+    {
+      title: "School Management System",
+      description:
+        "Full-stack school management system with secure RESTful APIs and role-based access for Admin, Teacher, and Student. Includes student management, teacher management, subject management, attendance tracking, and exam management with SQL Server backend.",
+      image: `${SchoolProj}`,
+      github: "https://github.com/supuntharindu123/School-Management-System",
+      skills: [
+        "React.js",
+        "Redux",
+        "ASP.NET Core",
+        "SQL Server",
+        "JWT",
+        "Policy-Based Authorization",
+      ],
+    },
+    {
+      title: "Shopping Mall Management System",
+      description:
+        "Comprehensive MERN stack system to manage mall operations including users, shops, transactions, parking, and memberships. Features role-based access control (RBAC) and real-time data updates.",
+      image: `${MallApp}`,
+      github:
+        "https://github.com/supuntharindu123/Shopping-Mall-Management-System",
+      skills: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "RBAC",
+        "RESTful APIs",
+      ],
+    },
+    {
+      title: "Resume Analyzer",
+      description:
+        "Comprehensive system to manage users and analyze resumes using NLP and microservices architecture. Implements secure authentication using JWT and Google OAuth with backend APIs for resume processing and keyword extraction.",
+      image: `${Resume}`,
+      github: "https://github.com/supuntharindu123/AIResumeAnalyzer",
+      skills: [
+        "MERN Stack",
+        "Flask",
+        "NLP",
+        "Google OAuth",
+        "JWT",
+        "OTP",
+        "Microservices",
+      ],
+    },
     {
       title: "Vehicle Advertisement System",
       description:
-        "Developed a web-based Vehicle Advertisement system with filter ads, post ads (with validations), user authentication, and a responsive UI.",
+        "Web-based Vehicle Advertisement platform with advanced search and filtering features, secure advertisement posting with data validation, and responsive design optimized across multiple devices.",
       image: `${Image1}`,
       github: "https://github.com/supuntharindu123/Vehical-Ads",
-      skills: ["Django", "HTML", "Bootstrap", "JavaScript", "MySQL"],
-    },
-    {
-      title: "My Portfolio",
-      description:
-        "I am Supun Tharindu Kumarasena, a third-year undergraduate student at SLIIT, pursuing a degree in Information Technology.",
-      image: `${Image}`,
-      github: "#",
-      skills: ["React.js", "Tailwind CSS", "Vite", "JavaScript"],
+      skills: ["Django", "MySQL", "Bootstrap", "JavaScript", "HTML", "CSS"],
     },
     {
       title: "Social Media Platform",
       description:
-        "User authentication (live validations), Messaging, Post creation, Following & Followers, and Profile management.",
+        "Scalable social media platform with real-time messaging, post interactions, and follow/unfollow system. Built with secure user authentication and profile management using Socket.io for real-time updates.",
       image: `${Social}`,
       github: "https://github.com/supuntharindu123/MYAPP",
-      skills: ["HTML", "Node.js", "MongoDB", "Socket.io", "Bootstrap"],
+      skills: [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Socket.io",
+        "React.js",
+        "Bootstrap",
+      ],
     },
     {
       title: "Live Chat Application",
       description:
-        "Developed a live chat application with send, delete, and edit messages, along with user authentication.",
+        "Real-time chat application supporting messaging and file sharing. Features editing, deletion, and sharing of messages with real-time updates and efficient message storage using MongoDB.",
       image: `${Livechat}`,
       github: "https://github.com/supuntharindu123/livechat_web_application",
       skills: [
         "React.js",
         "Node.js",
         "Express.js",
-        "Socket.io",
+        "WebSockets",
         "MongoDB",
-        "Tailwind Css",
+        "Tailwind CSS",
       ],
     },
-    // {
-    //   title: "User Management System",
-    //   description:
-    //     "Developed a user record management system with full CRUD operations using Django.",
-    //   image: `${Djangopython}`,
-    //   github: "https://github.com/supuntharindu123/Django",
-    //   skills: ["Python", "Django", "SQLite", "HTML", "CSS"],
-    // },
-    // {
-    //   title: "Task Management App",
-    //   description:
-    //     "Created a task management app with CRUD operations using Kotlin.",
-    //   image: `${ToDo}`,
-    //   github: "https://github.com/supuntharindu123/TaskmanagementApp",
-    //   skills: ["Kotlin", "Android", "SQLite", "XML"],
-    // },
+    {
+      title: "Online Class Management System",
+      description:
+        "Platform to manage classes, exams, notifications, and live interactions. Features class scheduling, exam management, automated notifications, and live chat per class for real-time student-teacher interaction.",
+      image: `${OnlineClass}`,
+      github:
+        "https://github.com/ShanelkaPramuditha/online-class-management-system",
+      skills: [
+        "React.js",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "Socket.io",
+        "WebSockets",
+      ],
+    },
     {
       title: "YouTube Clone",
-      description: "Created YouTube Clone using YouTube Data Api and React.",
+      description:
+        "Video browsing platform built with dynamic YouTube Data API integration and responsive user interface using React.js and Tailwind CSS.",
       image: `${MyTube}`,
       github: "https://github.com/supuntharindu123/mytube",
-      skills: ["React.js", "YouTube API", "CSS", "JavaScript"],
+      skills: ["React.js", "YouTube API", "Tailwind CSS", "JavaScript"],
+    },
+    {
+      title: "My Portfolio",
+      description:
+        "Professional portfolio website showcasing projects, skills, and experience as a Full Stack Developer with dark/light theme support and responsive design.",
+      image: `${Image}`,
+      github: "#",
+      skills: ["React.js", "Tailwind CSS", "Vite", "JavaScript"],
     },
   ];
 
